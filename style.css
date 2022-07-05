@@ -1,0 +1,53 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Kanit', sans-serif;
+}
+
+.menubar {
+    width: 100%;
+    height: 50px;
+    background: aquamarine;
+    box-shadow: 0 0 10px black;
+}
+
+.menubar h1{
+    margin: 1px;
+    padding: 0px;
+}
+
+
+.menubar ul{
+    font-size: medium;
+    list-style: none;
+    width: 1035px;
+    height: 30px;
+    float: left;
+    background: rosybrown;
+    margin: 1px 10px;
+    padding-top: 4px;
+}
+.menubar ul li{
+    float: left;
+    margin-right: 10px;
+}
+
+.menubar ul li a{
+    text-decoration: none;
+    color: aqua;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.menubar ul li a:hover{
+    border-bottom: 2px solid salmon;
+    border-width: 5px;
+    padding-bottom: 1.2px;
+}
+
+
+.container {
+    max-width: 960px;
+    margin: 0 62px;
+}
