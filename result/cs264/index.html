@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>คำร้องขอเพิ่มถอนรายวิชา</title>
+
+</head>
+<body bgcolor="black">
+	<div>
+		<style>
+			body {
+				background-image: url("ป๋วย.jpg");
+				background-size: cover;
+			}
+	</style>
+	<img src="tu.png" height="80" width="80">
+		<form>
+			<h4 align="center">
+				<label for="fname">วันที่:</label>
+	  			<input type="date" id="date" name="date" placeholder="วัน" size="1" maxlength="2"><br>
+	  			<label for="fname">คำนำหน้าชื่อ:</label>
+	  			<input type="text" id="prefix" name="prefix" size="3">
+	  			<label for="fname">ชื่อ:</label>
+	  			<input type="text" id="fname" name="fname">
+	  			<label for="lname">นามสกุล:</label>
+	  			<input type="text" id="lname" name="lname"><br>
+	  			<label for="fname">เลขทะเบียน:</label>
+	  			<input type="number" id="studentId" name="studentId" maxlength="10" min="0">
+	  			<label for="lname">ชั้นปี:</label>
+	  			<input type="text" id="studentYear" name="studentYear">
+	  			<label for="fname">สาขาวิชา:</label>
+	  			<input type="text" id="subject" name="subject"><br>
+	  			ที่อยู่<br>
+	  			<label for="lname">บ้านเลขที่:</label>
+	  			<input type="number" id="numHome" name="numHome" min="0">
+	  			<label for="fname">หมู่ที่:</label>
+	  			<input type="number" id="moo" name="moo" min="0">
+	  			<label for="lname">ตำบล:</label>
+	  			<input type="text" id="tambon" name="tambon"><br>
+	  			<label for="fname">อำเภอ:</label>
+	  			<input type="text" id="aumper" name="aumper">
+	  			<label for="lname">จังหวัด:</label>
+	  			<input type="text" id="county" name="county">
+	  			<label for="lname">รหัสไปรษณีย์:</label>
+	  			<input type="number" id="zipcode" name="zipcode" min="0"><br>
+	  			<label for="fname">เบอร์โทรศัพท์มือถือ:</label>
+	  			<input type="number" id="phoneNum" name="phoneNum" min="0">
+	  			<label for="lname">เบอร์โทรศัพท์บ้าน:</label>
+	  			<input type="number" id="homeNum" name="homeNum" min="0">
+	  			<label for="lname">อาจารย์ที่ปรึกษา:</label>
+	  			<input type="text" id="adviser" name="adviser"><br>
+	  			<label for="fname">จำนวนวิชาขอเพิ่มวิชา:</label>
+	  			<input type="number" id="addSub" name="addSub" min="0">
+	  			<label for="lname">จำนวนวิชาขอถอนวิชา:</label>
+	  			<input type="number" id="removeSub" name="removeSub" min="0">
+	  			<label for="lname">รายละเอียดวิชา:</label>
+	  			<input type="text" id="detailSub" name="detailSub"><br><br>
+	  			<label for="fname">รหัสวิชา:</label>
+	  			<input type="number" id="subjectId" name="subjectId" size="5" min="0">
+	  			<label for="lname">ชื่อวิชา:</label>
+	  			<input type="text" id="nameSubject" name="nameSubject" size="5">
+	  			<label for="lname">section:</label>
+	  			<input type="number" id="section" name="section" size="5" min="0">
+	  			<label for="fname">วันเวลาที่สอน:</label>
+	  			<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+	  			<label for="lname">หน่วยกิต:</label>
+	  			<input type="number" id="unit" name="unit" size="5" min="0">
+	  			<label for="lname">ชื่อผู้สอน:</label>
+	  			<input type="text" id="teacher" name="teacher"><br>
+	  			เหตุผล<br>
+	  			<textarea name="reason" id="reason" cols="30" rows="10"></textarea>
+	  			<br><br>
+	  			<input type="submit" value="ส่งแบบฟอร์ม">
+			</h4>
+		</form>
+	</div>
+</body>
+</html>
