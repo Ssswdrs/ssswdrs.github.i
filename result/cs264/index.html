@@ -4,74 +4,399 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>คำร้องขอเพิ่มถอนรายวิชา</title>
+	<style>
+		table {
+		  border-collapse: collapse;
+		  width: 90%;
+		}
 
+		td, th {
+		  border: 1px solid #dddddd;
+		  text-align: center;
+		  padding: 4px;
+		}
+
+		tr:nth-child(even) {
+		  background-color: #dddddd;
+
+		}
+		tr:nth-child(odd) {
+		  background-color: #EFE7BC;
+
+		}
+		tr:nth-child(1) {
+			background-color: #000000;
+		}
+		body {
+			background-image: url("ป๋วย.jpg");
+			background-size: cover;
+		}
+	
+	
+		input {
+			border: 1px solid #000000;
+			border-radius: 5px;
+			outline:0;
+			padding-left:10px;
+			padding-right:10px;
+		}
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			  -webkit-appearance: none;
+			  margin: 0;
+		}
+</style>
 </head>
 <body bgcolor="black">
 	<div>
-		<style>
-			body {
-				background-image: url("ป๋วย.jpg");
-				background-size: cover;
-			}
-	</style>
-	<img src="tu.png" height="80" width="80">
-		<form>
-			<h4 align="center">
-				<label for="fname">วันที่:</label>
-	  			<input type="date" id="date" name="date" placeholder="วัน" size="1" maxlength="2"><br>
-	  			<label for="fname">คำนำหน้าชื่อ:</label>
-	  			<input type="text" id="prefix" name="prefix" size="3">
-	  			<label for="fname">ชื่อ:</label>
-	  			<input type="text" id="fname" name="fname">
-	  			<label for="lname">นามสกุล:</label>
-	  			<input type="text" id="lname" name="lname"><br>
-	  			<label for="fname">เลขทะเบียน:</label>
-	  			<input type="number" id="studentId" name="studentId" maxlength="10" min="0">
-	  			<label for="lname">ชั้นปี:</label>
-	  			<input type="text" id="studentYear" name="studentYear">
-	  			<label for="fname">สาขาวิชา:</label>
-	  			<input type="text" id="subject" name="subject"><br>
-	  			ที่อยู่<br>
-	  			<label for="lname">บ้านเลขที่:</label>
-	  			<input type="number" id="numHome" name="numHome" min="0">
-	  			<label for="fname">หมู่ที่:</label>
+	<img src="tu.png" height="120" width="120">
+	<h1 style="color:white" align="center">คำร้องขอเพิ่ม-ถอน รายวิชา</h1>
+	<h4 style="color:white" align="center">คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยธรรมศาสตร์ ศูนย์รังสิต</h1>
+		<form action="/action_page.php">
+			<h4 style="color:white">	
+				<div align="right">
+					<label for="fname">วันที่:</label>
+	  				<input type="date" id="date" name="date" placeholder="วัน" size="1" maxlength="2" required>
+				</div>
+				<label for="topic">เรื่อง:</label>
+	  			<input style="width:300px;" type="text" id="topic" name="topic"><br>
+	  			เรียน <span style="font-size:14px">คณบดีคณะวิทยาศาสตร์และเทคโนโลยี</span><br><br>
+	  			สิ่งที่ส่งมาด้วย <span style="font-size:14px">ผลการจดทะเบียนทุกภาคเรียนจากเว็บสำนักทะเบียน</span><br><br>
+	  			<label for="prefix">คำนำหน้าชื่อ:</label>
+				<select name="prefix" id="prefix">
+				  <option value="null"></option>
+				  <option value="mr">นาย</option>
+				  <option value="miss">นางสาว</option>
+				  <option value="mrs">นาง</option>
+				</select>
+	  			<label for="fname">ชื่อ*:</label>
+	  			<input type="text" id="fname" name="fname" required>
+	  			<label for="lname">นามสกุล*:</label>
+	  			<input type="text" id="lname" name="lname" required>
+	  			<label for="studentId">เลขทะเบียน*:</label>
+	  			<input style="width:100px;" type="text" id="studentId" name="studentId" maxlength="10" min="0" required><br>
+	  			<label for="studentYear">ชั้นปีที่*:</label>
+	  			<input style="width:10px;" type="number" id="studentYear" name="studentYear" min="0" required>
+	  			<label for="subject">สาขาวิชา:</label>
+	  			<input type="text" id="subject" name="subject" size="50" required><br>
+	  			<br>ที่อยู่ที่สามารถติดต่อได้ทางไปรษณีย์<br>
+	  			<label for="numHome">บ้านเลขที่:</label>
+	  			<input style="width:50px;" type="number" id="numHome" name="numHome" min="0">
+	  			<label for="moo">หมู่ที่:</label>
 	  			<input type="number" id="moo" name="moo" min="0">
-	  			<label for="lname">ตำบล:</label>
-	  			<input type="text" id="tambon" name="tambon"><br>
-	  			<label for="fname">อำเภอ:</label>
-	  			<input type="text" id="aumper" name="aumper">
-	  			<label for="lname">จังหวัด:</label>
+	  			<label for="tambon">ตำบล:</label>
+	  			<input type="text" id="tambon" name="tambon">
+	  			<label for="aumper">อำเภอ:</label>
+	  			<input type="text" id="aumper" name="aumper"><br>
+	  			<label for="county">จังหวัด:</label>
 	  			<input type="text" id="county" name="county">
-	  			<label for="lname">รหัสไปรษณีย์:</label>
-	  			<input type="number" id="zipcode" name="zipcode" min="0"><br>
-	  			<label for="fname">เบอร์โทรศัพท์มือถือ:</label>
-	  			<input type="number" id="phoneNum" name="phoneNum" min="0">
-	  			<label for="lname">เบอร์โทรศัพท์บ้าน:</label>
-	  			<input type="number" id="homeNum" name="homeNum" min="0">
-	  			<label for="lname">อาจารย์ที่ปรึกษา:</label>
-	  			<input type="text" id="adviser" name="adviser"><br>
-	  			<label for="fname">จำนวนวิชาขอเพิ่มวิชา:</label>
-	  			<input type="number" id="addSub" name="addSub" min="0">
-	  			<label for="lname">จำนวนวิชาขอถอนวิชา:</label>
-	  			<input type="number" id="removeSub" name="removeSub" min="0">
-	  			<label for="lname">รายละเอียดวิชา:</label>
-	  			<input type="text" id="detailSub" name="detailSub"><br><br>
-	  			<label for="fname">รหัสวิชา:</label>
-	  			<input type="number" id="subjectId" name="subjectId" size="5" min="0">
-	  			<label for="lname">ชื่อวิชา:</label>
-	  			<input type="text" id="nameSubject" name="nameSubject" size="5">
-	  			<label for="lname">section:</label>
-	  			<input type="number" id="section" name="section" size="5" min="0">
-	  			<label for="fname">วันเวลาที่สอน:</label>
-	  			<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
-	  			<label for="lname">หน่วยกิต:</label>
-	  			<input type="number" id="unit" name="unit" size="5" min="0">
-	  			<label for="lname">ชื่อผู้สอน:</label>
-	  			<input type="text" id="teacher" name="teacher"><br>
-	  			เหตุผล<br>
-	  			<textarea name="reason" id="reason" cols="30" rows="10"></textarea>
+	  			<label for="zipcode">รหัสไปรษณีย์:</label>
+	  			<input style="width:50px;" type="text" id="zipcode" name="zipcode" min="0" maxlength="5"><br>
+	  			<label for="phoneNum">เบอร์โทรศัพท์มือถือ*:</label>
+	  			<input type="number" id="phoneNum" name="phoneNum" min="0" required>
+	  			<label for="homeNum">เบอร์โทรศัพท์บ้าน*:</label>
+	  			<input type="number" id="homeNum" name="homeNum" min="0" required>
+	  			<label for="adviser">อาจารย์ที่ปรึกษา:</label>
+	  			<input type="text" id="adviser" name="adviser"><br><br>
+	  			มีความประสงค์ขอ<label for="add">เพิ่ม </label>(
+	  					<input type="radio" id="add" name="req" value="true">	  
+						) / <label for="remove">ถอน </label>(
+						<input type="radio" id="remove" name="req" value="false">
+						) ดังรายการต่อไปนี้<br>
+	  			<label for="addSub">จำนวนวิชาขอเพิ่มวิชา:</label>
+	  			<select name="addSub" id="addSub">
+				  <option value="0">0</option>
+				  <option value="1">1</option>
+				  <option value="2">2</option>
+				  <option value="3">3</option>
+				  <option value="4">4</option>
+				  <option value="5">5</option>
+				  <option value="6">6</option>
+				  <option value="7">7</option>
+				  <option value="8">8</option>
+				  <option value="9">9</option>
+				  <option value="10">10</option>
+				</select>
+	  			<label for="removeSub">จำนวนวิชาขอถอนวิชา:</label>
+	  			<select name="removeSub" id="addSub">
+				  <option value="0">0</option>
+				  <option value="1">1</option>
+				  <option value="2">2</option>
+				  <option value="3">3</option>
+				  <option value="4">4</option>
+				  <option value="5">5</option>
+				  <option value="6">6</option>
+				  <option value="7">7</option>
+				  <option value="8">8</option>
+				  <option value="9">9</option>
+				  <option value="10">10</option>
+				</select>
 	  			<br><br>
-	  			<input type="submit" value="ส่งแบบฟอร์ม">
+	  			<table align="center">
+				  <tr>
+				    <th width="1">ลำดับ</th>
+				    <th width="1">รหัสวิชา</th>
+				    <th width="1">ชื่อวิชา</th>
+				    <th>section</th>
+				    <th>วันเวลาที่สอน</th>
+				    <th>หน่วยกิต</th>
+				    <th>ชื่อผู้สอน</th>
+				    <th>ผู้สอนอนุญาต</th>
+				  </tr>
+				  <tr>
+				    <td>1.</td>
+				    <td>
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  				</td>
+				    <td>
+				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    </td>
+				    <td>
+				    	<input style="width:60px;" type="number" id="section" name="section" size="5" min="0" placeholder="000000">
+				    </td>
+				    <td>
+				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    </td>
+				    <td>
+				    	<input style="width:10px;"type="number" id="unit" name="unit" min="0">
+				    </td>
+				    <td>
+				    	<input type="text" id="teacher" name="teacher"><br>
+				    </td>
+				    <td>
+				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    </td>
+				  </tr>
+				  <tr>
+				    <td>2.</td>
+				    <td>
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  				</td>
+				    <td>
+				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    </td>
+				    <td>
+				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    </td>
+				    <td>
+				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    </td>
+				    <td>
+				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    </td>
+				    <td>
+				    	<input type="text" id="teacher" name="teacher"><br>
+				    </td>
+				    <td>
+				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    </td>
+				  </tr>
+				  <tr>
+				    <td>3.</td>
+				    <td>
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  				</td>
+				    <td>
+				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    </td>
+				    <td>
+				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    </td>
+				    <td>
+				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    </td>
+				    <td>
+				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    </td>
+				    <td>
+				    	<input type="text" id="teacher" name="teacher"><br>
+				    </td>
+				    <td>
+				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    </td>
+				  </tr>
+				  <tr>
+				    <td>4.</td>
+				    <td>
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  				</td>
+				    <td>
+				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    </td>
+				    <td>
+				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    </td>
+				    <td>
+				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    </td>
+				    <td>
+				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    </td>
+				    <td>
+				    	<input type="text" id="teacher" name="teacher"><br>
+				    </td>
+				    <td>
+				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    </td>
+				  </tr>
+				  <tr>
+				    <td>5.</td>
+				    <td>
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  				</td>
+				    <td>
+				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    </td>
+				    <td>
+				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    </td>
+				    <td>
+				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    </td>
+				    <td>
+				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    </td>
+				    <td>
+				    	<input type="text" id="teacher" name="teacher"><br>
+				    </td>
+				    <td>
+				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    </td>
+				  </tr>
+				  <tr>
+				    <td>6.</td>
+				    <td>
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  				</td>
+				    <td>
+				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    </td>
+				    <td>
+				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    </td>
+				    <td>
+				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    </td>
+				    <td>
+				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    </td>
+				    <td>
+				    	<input type="text" id="teacher" name="teacher"><br>
+				    </td>
+				    <td>
+				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    </td>
+				  </tr>
+				  <tr>
+				    <td>7.</td>
+				    <td>
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  				</td>
+				    <td>
+				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    </td>
+				    <td>
+				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    </td>
+				    <td>
+				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    </td>
+				    <td>
+				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    </td>
+				    <td>
+				    	<input type="text" id="teacher" name="teacher"><br>
+				    </td>
+				    <td>
+				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    </td>
+				  </tr>
+				  				  <tr>
+				    <td>8.</td>
+				    <td>
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  				</td>
+				    <td>
+				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    </td>
+				    <td>
+				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    </td>
+				    <td>
+				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    </td>
+				    <td>
+				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    </td>
+				    <td>
+				    	<input type="text" id="teacher" name="teacher"><br>
+				    </td>
+				    <td>
+				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    </td>
+				  </tr>
+				  <tr>
+				    <td>9.</td>
+				    <td>
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  				</td>
+				    <td>
+				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    </td>
+				    <td>
+				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    </td>
+				    <td>
+				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    </td>
+				    <td>
+				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    </td>
+				    <td>
+				    	<input type="text" id="teacher" name="teacher"><br>
+				    </td>
+				    <td>
+				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    </td>
+				  </tr>
+				  <tr>
+				    <td>10.</td>
+				    <td>
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  				</td>
+				    <td>
+				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    </td>
+				    <td>
+				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    </td>
+				    <td>
+				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    </td>
+				    <td>
+				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    </td>
+				    <td>
+				    	<input type="text" id="teacher" name="teacher"><br>
+				    </td>
+				    <td>
+				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    </td>
+				  </tr>
+				</table>
+				<br>
+	  			
+	  			เหตุผลที่ขอ<label for="add">เพิ่ม </label>(
+	  					<input type="radio" id="add" name="option" value="true">	  
+						) / <label for="remove">ถอน </label>(
+						<input type="radio" id="remove" name="option" value="false">
+						)<br>
+				เพราะ<br>
+				<textarea name="reason" id="reason" cols="100" rows="4"></textarea>
+	  			<br><br>
+	  			<div id="submit">
+	  				<input style="margin-left: 48%" id="submit" type="submit" value="ส่งแบบฟอร์ม">
+	  			</div>
 			</h4>
 		</form>
 	</div>
