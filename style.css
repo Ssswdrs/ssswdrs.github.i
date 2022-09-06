@@ -40,7 +40,7 @@ body {
     text-decoration: none;
     color: black;
     border-bottom: 2px solid transparent;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     transition: all 0.3s ease;
 }
 
@@ -48,6 +48,7 @@ body {
     border-bottom: 2px solid rosybrown;
     border-width: 5px;
     padding-bottom: 1.2px;
+    border-radius: 9px;
 }
 
 .header {
