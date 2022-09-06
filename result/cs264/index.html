@@ -11,21 +11,23 @@
 		}
 
 		td, th {
-		  border: 1px solid #dddddd;
+		  border: 1px solid #FCF8E8;
 		  text-align: center;
 		  padding: 4px;
+		  border: 1px transparent;
+  		  border-radius: 7px;
 		}
 
 		tr:nth-child(even) {
-		  background-color: #dddddd;
+		  background-color: #94B49F;
 
 		}
 		tr:nth-child(odd) {
-		  background-color: #EFE7BC;
+		  background-color: #ECB390;
 
 		}
 		tr:nth-child(1) {
-			background-color: #000000;
+			background-color: #DF7861;
 		}
 		body {
 			background-image: url("ป๋วย.jpg");
@@ -34,7 +36,7 @@
 	
 	
 		input {
-			border: 1px solid #000000;
+			border: 1px solid #FFF5E1;
 			border-radius: 5px;
 			outline:0;
 			padding-left:10px;
@@ -50,10 +52,10 @@
 <body bgcolor="black">
 	<div>
 	<img src="tu.png" height="120" width="120">
-	<h1 style="color:white" align="center">คำร้องขอเพิ่ม-ถอน รายวิชา</h1>
-	<h4 style="color:white" align="center">คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยธรรมศาสตร์ ศูนย์รังสิต</h1>
+	<h1 style="color:#F1F6F9" align="center">คำร้องขอเพิ่ม-ถอน รายวิชา</h1>
+	<h4 style="color:#F1F6F9" align="center">คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยธรรมศาสตร์ ศูนย์รังสิต</h1>
 		<form action="/action_page.php">
-			<h4 style="color:white">	
+			<h4 style="color:#F1F6F9">	
 				<div align="right">
 					<label for="fname">วันที่:</label>
 	  				<input type="date" id="date" name="date" placeholder="วัน" size="1" maxlength="2" required>
@@ -63,8 +65,8 @@
 	  			เรียน <span style="font-size:14px">คณบดีคณะวิทยาศาสตร์และเทคโนโลยี</span><br><br>
 	  			สิ่งที่ส่งมาด้วย <span style="font-size:14px">ผลการจดทะเบียนทุกภาคเรียนจากเว็บสำนักทะเบียน</span><br><br>
 	  			<label for="prefix">คำนำหน้าชื่อ:</label>
-				<select name="prefix" id="prefix">
-				  <option value="null"></option>
+				<select id="prefix" name="prefix">
+				  <option value="null">-</option>
 				  <option value="mr">นาย</option>
 				  <option value="miss">นางสาว</option>
 				  <option value="mrs">นาง</option>
@@ -77,7 +79,7 @@
 	  			<input style="width:100px;" type="text" id="studentId" name="studentId" maxlength="10" min="0" required><br>
 	  			<label for="studentYear">ชั้นปีที่*:</label>
 	  			<input style="width:10px;" type="number" id="studentYear" name="studentYear" min="0" required>
-	  			<label for="subject">สาขาวิชา:</label>
+	  			<label for="subject">สาขาวิชา*:</label>
 	  			<input type="text" id="subject" name="subject" size="50" required><br>
 	  			<br>ที่อยู่ที่สามารถติดต่อได้ทางไปรษณีย์<br>
 	  			<label for="numHome">บ้านเลขที่:</label>
@@ -94,10 +96,10 @@
 	  			<input style="width:50px;" type="text" id="zipcode" name="zipcode" min="0" maxlength="5"><br>
 	  			<label for="phoneNum">เบอร์โทรศัพท์มือถือ*:</label>
 	  			<input type="number" id="phoneNum" name="phoneNum" min="0" required>
-	  			<label for="homeNum">เบอร์โทรศัพท์บ้าน*:</label>
-	  			<input type="number" id="homeNum" name="homeNum" min="0" required>
-	  			<label for="adviser">อาจารย์ที่ปรึกษา:</label>
-	  			<input type="text" id="adviser" name="adviser"><br><br>
+	  			<label for="homeNum">เบอร์โทรศัพท์บ้าน:</label>
+	  			<input type="number" id="homeNum" name="homeNum" min="0">
+	  			<label for="adviser">อาจารย์ที่ปรึกษา*:</label>
+	  			<input type="text" id="adviser" name="adviser" required><br><br>
 	  			มีความประสงค์ขอ<label for="add">เพิ่ม </label>(
 	  					<input type="radio" id="add" name="req" value="true">	  
 						) / <label for="remove">ถอน </label>(
@@ -146,241 +148,241 @@
 				  <tr>
 				    <td>1.</td>
 				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId1">
 	  				</td>
 				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    	<input type="text" id="nameSubject" name="nameSubject1" size="7">
 				    </td>
 				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section" size="5" min="0" placeholder="000000">
+				    	<input style="width:60px;" type="number" id="section" name="section1" size="5" min="0" placeholder="000000">
 				    </td>
 				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    	<input type="date" id="dateStudy" name="dateStudy1" size="5"><br>
 				    </td>
 				    <td>
-				    	<input style="width:10px;"type="number" id="unit" name="unit" min="0">
+				    	<input style="width:10px;"type="number" id="unit" name="unit1" min="0">
 				    </td>
 				    <td>
-				    	<input type="text" id="teacher" name="teacher"><br>
+				    	<input type="text" id="teacher" name="teacher1"><br>
 				    </td>
 				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    	<input type="text" id="allowTeacher" name="allowTeacher1"><br>
 				    </td>
 				  </tr>
 				  <tr>
 				    <td>2.</td>
 				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId2">
 	  				</td>
 				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    	<input type="text" id="nameSubject" name="nameSubject2" size="7">
 				    </td>
 				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    	<input style="width:60px;" type="number" id="section" name="section2" min="0" placeholder="000000">
 				    </td>
 				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    	<input type="date" id="dateStudy" name="dateStudy2" size="5"><br>
 				    </td>
 				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    	<input style="width:10px;" type="number" id="unit" name="unit2" min="0">
 				    </td>
 				    <td>
-				    	<input type="text" id="teacher" name="teacher"><br>
+				    	<input type="text" id="teacher" name="teacher2"><br>
 				    </td>
 				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    	<input type="text" id="allowTeacher" name="allowTeacher2"><br>
 				    </td>
 				  </tr>
 				  <tr>
 				    <td>3.</td>
 				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId3">
 	  				</td>
 				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    	<input type="text" id="nameSubject" name="nameSubject3" size="7">
 				    </td>
 				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    	<input style="width:60px;" type="number" id="section" name="section3" min="0" placeholder="000000">
 				    </td>
 				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    	<input type="date" id="dateStudy" name="dateStudy3" size="5"><br>
 				    </td>
 				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    	<input style="width:10px;" type="number" id="unit" name="unit3" min="0">
 				    </td>
 				    <td>
-				    	<input type="text" id="teacher" name="teacher"><br>
+				    	<input type="text" id="teacher" name="teacher3"><br>
 				    </td>
 				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    	<input type="text" id="allowTeacher" name="allowTeacher3"><br>
 				    </td>
 				  </tr>
 				  <tr>
 				    <td>4.</td>
 				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId4">
 	  				</td>
 				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    	<input type="text" id="nameSubject" name="nameSubject4" size="7">
 				    </td>
 				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    	<input style="width:60px;" type="number" id="section" name="section4" min="0" placeholder="000000">
 				    </td>
 				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    	<input type="date" id="dateStudy" name="dateStudy4" size="5"><br>
 				    </td>
 				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    	<input style="width:10px;" type="number" id="unit" name="unit4" min="0">
 				    </td>
 				    <td>
-				    	<input type="text" id="teacher" name="teacher"><br>
+				    	<input type="text" id="teacher" name="teacher4"><br>
 				    </td>
 				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    	<input type="text" id="allowTeacher" name="allowTeacher4"><br>
 				    </td>
 				  </tr>
 				  <tr>
 				    <td>5.</td>
 				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId5">
 	  				</td>
 				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    	<input type="text" id="nameSubject" name="nameSubject5" size="7">
 				    </td>
 				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    	<input style="width:60px;" type="number" id="section" name="section5" min="0" placeholder="000000">
 				    </td>
 				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    	<input type="date" id="dateStudy" name="dateStudy5" size="5"><br>
 				    </td>
 				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    	<input style="width:10px;" type="number" id="unit" name="unit5" min="0">
 				    </td>
 				    <td>
-				    	<input type="text" id="teacher" name="teacher"><br>
+				    	<input type="text" id="teacher" name="teacher5"><br>
 				    </td>
 				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    	<input type="text" id="allowTeacher" name="allowTeacher5"><br>
 				    </td>
 				  </tr>
 				  <tr>
 				    <td>6.</td>
 				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId6">
 	  				</td>
 				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    	<input type="text" id="nameSubject" name="nameSubject6" size="7">
 				    </td>
 				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    	<input style="width:60px;" type="number" id="section" name="section6" min="0" placeholder="000000">
 				    </td>
 				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    	<input type="date" id="dateStudy" name="dateStudy6" size="5"><br>
 				    </td>
 				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    	<input style="width:10px;" type="number" id="unit" name="unit6" min="0">
 				    </td>
 				    <td>
-				    	<input type="text" id="teacher" name="teacher"><br>
+				    	<input type="text" id="teacher" name="teacher6"><br>
 				    </td>
 				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    	<input type="text" id="allowTeacher" name="allowTeacher6"><br>
 				    </td>
 				  </tr>
 				  <tr>
 				    <td>7.</td>
 				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId7">
 	  				</td>
 				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    	<input type="text" id="nameSubject" name="nameSubject7" size="7">
 				    </td>
 				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    	<input style="width:60px;" type="number" id="section" name="section7" min="0" placeholder="000000">
 				    </td>
 				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    	<input type="date" id="dateStudy" name="dateStudy7" size="5"><br>
 				    </td>
 				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    	<input style="width:10px;" type="number" id="unit" name="unit7" min="0">
 				    </td>
 				    <td>
-				    	<input type="text" id="teacher" name="teacher"><br>
+				    	<input type="text" id="teacher" name="teacher7"><br>
 				    </td>
 				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    	<input type="text" id="allowTeacher" name="allowTeacher7"><br>
 				    </td>
 				  </tr>
 				  				  <tr>
 				    <td>8.</td>
 				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId8">
 	  				</td>
 				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    	<input type="text" id="nameSubject" name="nameSubject8" size="7">
 				    </td>
 				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    	<input style="width:60px;" type="number" id="section" name="section8" min="0" placeholder="000000">
 				    </td>
 				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    	<input type="date" id="dateStudy" name="dateStudy8" size="5"><br>
 				    </td>
 				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    	<input style="width:10px;" type="number" id="unit" name="unit8" min="0">
 				    </td>
 				    <td>
-				    	<input type="text" id="teacher" name="teacher"><br>
+				    	<input type="text" id="teacher" name="teacher8"><br>
 				    </td>
 				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    	<input type="text" id="allowTeacher" name="allowTeacher8"><br>
 				    </td>
 				  </tr>
 				  <tr>
 				    <td>9.</td>
 				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId9">
 	  				</td>
 				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    	<input type="text" id="nameSubject" name="nameSubject9" size="7">
 				    </td>
 				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    	<input style="width:60px;" type="number" id="section" name="section9" min="0" placeholder="000000">
 				    </td>
 				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    	<input type="date" id="dateStudy" name="dateStudy9" size="5"><br>
 				    </td>
 				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    	<input style="width:10px;" type="number" id="unit" name="unit9" min="0">
 				    </td>
 				    <td>
-				    	<input type="text" id="teacher" name="teacher"><br>
+				    	<input type="text" id="teacher" name="teacher9"><br>
 				    </td>
 				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    	<input type="text" id="allowTeacher" name="allowTeacher9"><br>
 				    </td>
 				  </tr>
 				  <tr>
 				    <td>10.</td>
 				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId">
+	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId10">
 	  				</td>
 				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject" size="7">
+				    	<input type="text" id="nameSubject" name="nameSubject10" size="7">
 				    </td>
 				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section" min="0" placeholder="000000">
+				    	<input style="width:60px;" type="number" id="section" name="section10" min="0" placeholder="000000">
 				    </td>
 				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy" size="5"><br>
+				    	<input type="date" id="dateStudy" name="dateStudy10" size="5"><br>
 				    </td>
 				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit" min="0">
+				    	<input style="width:10px;" type="number" id="unit" name="unit10" min="0">
 				    </td>
 				    <td>
-				    	<input type="text" id="teacher" name="teacher"><br>
+				    	<input type="text" id="teacher" name="teacher10"><br>
 				    </td>
 				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher"><br>
+				    	<input type="text" id="allowTeacher" name="allowTeacher10"><br>
 				    </td>
 				  </tr>
 				</table>
