@@ -14,7 +14,7 @@
 		  border: 1px solid #FCF8E8;
 		  text-align: center;
 		  padding: 4px;
-		  border: 1px transparent;
+		  border: 1px solid transparent;
   		  border-radius: 7px;
 		}
 
@@ -34,6 +34,11 @@
 			background-size: cover;
 		}
 	
+		select {
+			border: 1px solid #FFF5E1;
+			border-radius: 5px;
+			outline:0;
+		}
 	
 		input {
 			border: 1px solid #FFF5E1;
@@ -51,7 +56,9 @@
 </head>
 <body bgcolor="black">
 	<div>
-	<img src="tu.png" height="120" width="120">
+	<div id="logo" align="center" style="padding-top: 10px;">
+		<img src="tu.png" height="120" width="120">
+	</div>
 	<h1 style="color:#F1F6F9" align="center">คำร้องขอเพิ่ม-ถอน รายวิชา</h1>
 	<h4 style="color:#F1F6F9" align="center">คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยธรรมศาสตร์ ศูนย์รังสิต</h1>
 		<form action="/action_page.php">
@@ -66,7 +73,7 @@
 	  			สิ่งที่ส่งมาด้วย <span style="font-size:14px">ผลการจดทะเบียนทุกภาคเรียนจากเว็บสำนักทะเบียน</span><br><br>
 	  			<label for="prefix">คำนำหน้าชื่อ:</label>
 				<select id="prefix" name="prefix">
-				  <option value="null">-</option>
+				  <option value="">-</option>
 				  <option value="mr">นาย</option>
 				  <option value="miss">นางสาว</option>
 				  <option value="mrs">นาง</option>
@@ -76,9 +83,19 @@
 	  			<label for="lname">นามสกุล*:</label>
 	  			<input type="text" id="lname" name="lname" required>
 	  			<label for="studentId">เลขทะเบียน*:</label>
-	  			<input style="width:100px;" type="text" id="studentId" name="studentId" maxlength="10" min="0" required><br>
+	  			<input style="width:100px;" type="number" id="studentId" name="studentId" min="0" required><br>
 	  			<label for="studentYear">ชั้นปีที่*:</label>
-	  			<input style="width:10px;" type="number" id="studentYear" name="studentYear" min="0" required>
+	  			<select id="studentYear" name="studentYear" required>
+				  <option value="">-</option>
+				  <option value="1">1</option>
+				  <option value="2">2</option>
+				  <option value="3">3</option>
+				  <option value="4">4</option>
+				  <option value="5">5</option>
+				  <option value="6">6</option>
+				  <option value="7">7</option>
+				  <option value="8">8</option>
+				</select>
 	  			<label for="subject">สาขาวิชา*:</label>
 	  			<input type="text" id="subject" name="subject" size="50" required><br>
 	  			<br>ที่อยู่ที่สามารถติดต่อได้ทางไปรษณีย์<br>
@@ -100,8 +117,8 @@
 	  			<input type="number" id="homeNum" name="homeNum" min="0">
 	  			<label for="adviser">อาจารย์ที่ปรึกษา*:</label>
 	  			<input type="text" id="adviser" name="adviser" required><br><br>
-	  			มีความประสงค์ขอ<label for="add">เพิ่ม </label>(
-	  					<input type="radio" id="add" name="req" value="true">	  
+	  			*มีความประสงค์ขอ<label for="add">เพิ่ม </label>(
+	  					<input type="radio" id="add" name="req" value="true" required>	  
 						) / <label for="remove">ถอน </label>(
 						<input type="radio" id="remove" name="req" value="false">
 						) ดังรายการต่อไปนี้<br>
