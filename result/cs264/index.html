@@ -1,421 +1,790 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>คำร้องขอเพิ่มถอนรายวิชา</title>
-	<style>
-		table {
-		  border-collapse: collapse;
-		  width: 90%;
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>คำร้องขอเพิ่มถอนรายวิชา</title>
+		<style>
+			@import 'https://fonts.googleapis.com/css?family=Prompt';
+			table {
+			border-collapse: collapse;
+			width: 100%;
+			border-radius: 15px;
+  			overflow: hidden;
+			}
+
+			td, th {
+			text-align: center;
+			padding: 3px;
+			border-right: 2px solid rgba(255, 255, 255, 0.1);
+			}
+
+			tr:nth-child(even) {
+			background-color: rgba(173, 207, 159, .7);
+			}
+			tr:nth-child(odd) {
+			background-color: rgba(206, 216, 158, .7);
+			}
+			tr:nth-child(1) {
+				background-color: rgba(118, 186, 153, .7);
+			}
+			td:last-child,th:last-child{
+				border-right: none;
+			}
+			body {
+				background-image: url("puey.jpg");
+				background-size: cover;
+				margin-left: 20px;
+				margin-right: 20px;
+				background-attachment: fixed;
+				background-position: center;
+				font-family: 'Prompt', sans-serif;
+			}
+		
+			select {
+				border: 1px solid #FFF5E1;
+				border-radius: 5px;
+				outline:0;
+			}
+		
+			input {
+				border: 1px solid #FFF5E1;
+				border-radius: 5px;
+				outline:0;
+				padding-left:5px;
+				padding-right:5px;
+			}
+			input::-webkit-outer-spin-button,
+			input::-webkit-inner-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+
+			input:focus {
+				  background-color: #F5EDDC;
+				  border-color: #DF7861;
+			}
+
+			.date {
+				margin-left: 84%;
+			}
+			.glass {
+				background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+				backdrop-filter: blur(10px);
+				-webkit-backdrop-filter: blur(10px);
+				border-radius: 20px;
+				border:1px solid rgba(255, 255, 255, 0.18);
+				box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+				padding-left: 20px;
+				padding-right: 20px;
+				padding-top: 20px;
+				padding-bottom: 20px;
+			}
+			
+		.form-submit-button {
+			box-shadow:inset 0px 1px 0px 0px #ffffff;
+			background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+			background-color:#ededed;
+			border-radius:11px;
+			border:1px solid #dcdcdc;
+			display:inline-block;
+			cursor:pointer;
+			color:#777777;
+			font-family:Arial;
+			font-size:15px;
+			font-weight:bold;
+			padding:6px 24px;
+			text-decoration:none;
+			text-shadow:0px 1px 0px #ffffff;
+			margin-bottom: 10px;
+		}
+		.form-submit-button:hover {
+			background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+			background-color:#dfdfdf;
+		}
+		.form-submit-button:active {
+			position:relative;
+			top:1px;
 		}
 
-		td, th {
-		  border: 1px solid #FCF8E8;
-		  text-align: center;
-		  padding: 4px;
-		  border: 1px solid transparent;
-  		  border-radius: 7px;
+		fieldset {
+			border-width: 2px;
 		}
 
-		tr:nth-child(even) {
-		  background-color: #94B49F;
+		.headerText{
+		    top: 50%; 
+		    left: 50%;
+		    color: #f5f5f5;
+		    text-shadow: 1px 1px 1px #919191,
+		        1px 2px 1px #919191,
+		        1px 3px 1px #919191,
+		        1px 4px 1px #919191,
+		        1px 5px 1px #919191,
+		    1px 18px 6px rgba(16,16,16,0.4),
+		    1px 22px 10px rgba(16,16,16,0.2),
+		    1px 25px 35px rgba(16,16,16,0.2),
+		    1px 30px 60px rgba(16,16,16,0.4);
+		}
 
+		.subHeader {
+			top: 50%; 
+		    left: 50%;
+		    color: #f5f5f5;
+		    text-shadow: 1px 1px 1px #919191,
+		        1px 2px 1px #919191,
+		        1px 3px 1px #919191,
+		    1px 18px 6px rgba(16,16,16,0.4),
+		    1px 22px 10px rgba(16,16,16,0.2),
+		    1px 25px 35px rgba(16,16,16,0.2),
+		    1px 30px 60px rgba(16,16,16,0.4);
 		}
-		tr:nth-child(odd) {
-		  background-color: #ECB390;
 
-		}
-		tr:nth-child(1) {
-			background-color: #DF7861;
-		}
-		body {
-			background-image: url("ป๋วย.jpg");
-			background-size: cover;
-		}
-	
-		select {
-			border: 1px solid #FFF5E1;
-			border-radius: 5px;
-			outline:0;
-		}
-	
-		input {
-			border: 1px solid #FFF5E1;
-			border-radius: 5px;
-			outline:0;
-			padding-left:10px;
-			padding-right:10px;
-		}
-		input::-webkit-outer-spin-button,
-		input::-webkit-inner-spin-button {
-			  -webkit-appearance: none;
-			  margin: 0;
-		}
-</style>
-</head>
-<body bgcolor="black">
-	<div>
-	<div id="logo" align="center" style="padding-top: 10px;">
-		<img src="tu.png" height="120" width="120">
-	</div>
-	<h1 style="color:#F1F6F9" align="center">คำร้องขอเพิ่ม-ถอน รายวิชา</h1>
-	<h4 style="color:#F1F6F9" align="center">คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยธรรมศาสตร์ ศูนย์รังสิต</h1>
-		<form action="/action_page.php">
-			<h4 style="color:#F1F6F9">	
-				<div align="right">
+		</style>
+	</head>
+	<body bgcolor="black">
+		<div id="glass">
+			<div id="logo" align="center" style="padding-top: 15px;">
+				<img src="tu.png" height="160" width="160">
+			</div>
+			<center class="headerText">
+			<h1 style="color:#F1F6F9;margin-top: 10px;margin-bottom: -10px;">คำร้องขอเพิ่ม-ถอน รายวิชา</h1>
+			</center>
+			<center class="subHeader">
+			<h3 style="color:#F1F6F9;">คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยธรรมศาสตร์ ศูนย์รังสิต</h3>
+			</center>
+			<form action="/action_page.php">
+				<h4 style="color:#F1F6F9;" class="glass">
+				<div class="date">
 					<label for="fname">วันที่:</label>
-	  				<input type="date" id="date" name="date" placeholder="วัน" size="1" maxlength="2" required>
+					<input type="date" id="date" name="date" required>
 				</div>
 				<label for="topic">เรื่อง:</label>
-	  			<input style="width:300px;" type="text" id="topic" name="topic"><br>
-	  			เรียน <span style="font-size:14px">คณบดีคณะวิทยาศาสตร์และเทคโนโลยี</span><br><br>
-	  			สิ่งที่ส่งมาด้วย <span style="font-size:14px">ผลการจดทะเบียนทุกภาคเรียนจากเว็บสำนักทะเบียน</span><br><br>
-	  			<label for="prefix">คำนำหน้าชื่อ:</label>
+				<input style="width:30%" type="text" id="topic" name="topic"><br>
+				เรียน <span style="font-size:14px">คณบดีคณะวิทยาศาสตร์และเทคโนโลยี</span><br><br>
+				สิ่งที่ส่งมาด้วย <span style="font-size:14px">ผลการจดทะเบียนทุกภาคเรียนจากเว็บสำนักทะเบียน</span><br><br>
+				<fieldset style="border-radius: 10px">
+				&emsp;&emsp;<label for="prefix">คำนำหน้าชื่อ:</label>
 				<select id="prefix" name="prefix">
-				  <option value="">-</option>
-				  <option value="mr">นาย</option>
-				  <option value="miss">นางสาว</option>
-				  <option value="mrs">นาง</option>
+					<option value="">-</option>
+					<option value="mr">นาย</option>
+					<option value="miss">นางสาว</option>
+					<option value="mrs">นาง</option>
 				</select>
-	  			<label for="fname">ชื่อ*:</label>
-	  			<input type="text" id="fname" name="fname" required>
-	  			<label for="lname">นามสกุล*:</label>
-	  			<input type="text" id="lname" name="lname" required>
-	  			<label for="studentId">เลขทะเบียน*:</label>
-	  			<input style="width:100px;" type="number" id="studentId" name="studentId" min="0" required><br>
-	  			<label for="studentYear">ชั้นปีที่*:</label>
-	  			<select id="studentYear" name="studentYear" required>
-				  <option value="">-</option>
-				  <option value="1">1</option>
-				  <option value="2">2</option>
-				  <option value="3">3</option>
-				  <option value="4">4</option>
-				  <option value="5">5</option>
-				  <option value="6">6</option>
-				  <option value="7">7</option>
-				  <option value="8">8</option>
+				<label for="fname">ชื่อ*:</label>
+				<input style="width: 20%;" type="text" id="fname" name="fname" placeholder="Name" required>
+				<label for="lname">นามสกุล*:</label>
+				<input style="width: 20%;" type="text" id="lname" name="lname" placeholder="Surname" required>
+				<label for="studentId">เลขทะเบียน*:</label>
+				<input style="width: 15%;" type="number" id="studentId" name="studentId" min="0" required><br>
+				&nbsp;<label for="studentYear">ชั้นปีที่*:</label>
+				<select id="studentYear" name="studentYear" required>
+					<option value="">-</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
 				</select>
-	  			<label for="subject">สาขาวิชา*:</label>
-	  			<input type="text" id="subject" name="subject" size="50" required><br>
-	  			<br>ที่อยู่ที่สามารถติดต่อได้ทางไปรษณีย์<br>
-	  			<label for="numHome">บ้านเลขที่:</label>
-	  			<input style="width:50px;" type="number" id="numHome" name="numHome" min="0">
-	  			<label for="moo">หมู่ที่:</label>
-	  			<input type="number" id="moo" name="moo" min="0">
-	  			<label for="tambon">ตำบล:</label>
-	  			<input type="text" id="tambon" name="tambon">
-	  			<label for="aumper">อำเภอ:</label>
-	  			<input type="text" id="aumper" name="aumper"><br>
-	  			<label for="county">จังหวัด:</label>
-	  			<input type="text" id="county" name="county">
-	  			<label for="zipcode">รหัสไปรษณีย์:</label>
-	  			<input style="width:50px;" type="text" id="zipcode" name="zipcode" min="0" maxlength="5"><br>
-	  			<label for="phoneNum">เบอร์โทรศัพท์มือถือ*:</label>
-	  			<input type="number" id="phoneNum" name="phoneNum" min="0" required>
-	  			<label for="homeNum">เบอร์โทรศัพท์บ้าน:</label>
-	  			<input type="number" id="homeNum" name="homeNum" min="0">
-	  			<label for="adviser">อาจารย์ที่ปรึกษา*:</label>
-	  			<input type="text" id="adviser" name="adviser" required><br><br>
-	  			*มีความประสงค์ขอ<label for="add">เพิ่ม </label>(
-	  					<input type="radio" id="add" name="req" value="true" required>	  
-						) / <label for="remove">ถอน </label>(
-						<input type="radio" id="remove" name="req" value="false">
-						) ดังรายการต่อไปนี้<br>
-	  			<label for="addSub">จำนวนวิชาขอเพิ่มวิชา:</label>
-	  			<select name="addSub" id="addSub">
-				  <option value="0">0</option>
-				  <option value="1">1</option>
-				  <option value="2">2</option>
-				  <option value="3">3</option>
-				  <option value="4">4</option>
-				  <option value="5">5</option>
-				  <option value="6">6</option>
-				  <option value="7">7</option>
-				  <option value="8">8</option>
-				  <option value="9">9</option>
-				  <option value="10">10</option>
+				&nbsp;<label for="subject">สาขาวิชา*:</label>
+				<input style="width: 30%;" type="text" id="subject" name="subject" size="50" required><br>
+					<fieldset style="border-radius: 10px">
+						<legend>ที่อยู่ที่สามารถติดต่อได้ทางไปรษณีย์</legend>
+						<label for="numHome">บ้านเลขที่:</label>
+						<input style="width:50px;" type="number" id="numHome" name="numHome" min="0">
+						&nbsp;<label for="moo">หมู่ที่:</label>
+						<input style="width:50px;" type="number" id="moo" name="moo" min="0">
+						&nbsp;<label for="tambon">ตำบล:</label>
+						<input type="text" id="tambon" name="tambon">
+						&nbsp;<label for="aumper">อำเภอ:</label>
+						<input type="text" id="aumper" name="aumper"><br>
+						<label for="county">จังหวัด:</label>
+						<input type="text" id="county" name="county">
+						&nbsp;<label for="zipcode">รหัสไปรษณีย์:</label>
+						<input style="width:50px;" type="text" id="zipcode" name="zipcode" min="0" maxlength="5"><br>
+						<label for="phoneNum">เบอร์โทรศัพท์มือถือ*:</label>
+						<input type="number" id="phoneNum" name="phoneNum" min="0" style="width: 80px;" required>
+						&nbsp;<label for="homeNum">เบอร์โทรศัพท์บ้าน*:</label>
+						<input type="number" id="homeNum" name="homeNum" min="0" style="width: 80px;" required>
+						&nbsp;<label for="adviser">อาจารย์ที่ปรึกษา*:</label>
+						<input type="text" id="adviser" name="adviser" style="width: 170px;" required>
+					</fieldset>
+				</fieldset>
+				<br>
+				*มีความประสงค์ขอ<label for="add">เพิ่ม </label>(
+				<input type="radio" id="add" name="req" value="true" required>
+				) / <label for="remove">ถอน </label>(
+				<input type="radio" id="remove" name="req" value="false">
+				) ดังรายการต่อไปนี้<br>
+				<label for="addSub">จำนวนวิชาขอเพิ่มวิชา:</label>
+				<select name="addSub" id="addSub">
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
 				</select>
-	  			<label for="removeSub">จำนวนวิชาขอถอนวิชา:</label>
-	  			<select name="removeSub" id="addSub">
-				  <option value="0">0</option>
-				  <option value="1">1</option>
-				  <option value="2">2</option>
-				  <option value="3">3</option>
-				  <option value="4">4</option>
-				  <option value="5">5</option>
-				  <option value="6">6</option>
-				  <option value="7">7</option>
-				  <option value="8">8</option>
-				  <option value="9">9</option>
-				  <option value="10">10</option>
+				<label for="removeSub">จำนวนวิชาขอถอนวิชา:</label>
+				<select name="removeSub" id="addSub">
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
 				</select>
-	  			<br><br>
-	  			<table align="center">
-				  <tr>
-				    <th width="1">ลำดับ</th>
-				    <th width="1">รหัสวิชา</th>
-				    <th width="1">ชื่อวิชา</th>
-				    <th>section</th>
-				    <th>วันเวลาที่สอน</th>
-				    <th>หน่วยกิต</th>
-				    <th>ชื่อผู้สอน</th>
-				    <th>ผู้สอนอนุญาต</th>
-				  </tr>
-				  <tr>
-				    <td>1.</td>
-				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId1">
-	  				</td>
-				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject1" size="7">
-				    </td>
-				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section1" size="5" min="0" placeholder="000000">
-				    </td>
-				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy1" size="5"><br>
-				    </td>
-				    <td>
-				    	<input style="width:10px;"type="number" id="unit" name="unit1" min="0">
-				    </td>
-				    <td>
-				    	<input type="text" id="teacher" name="teacher1"><br>
-				    </td>
-				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher1"><br>
-				    </td>
-				  </tr>
-				  <tr>
-				    <td>2.</td>
-				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId2">
-	  				</td>
-				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject2" size="7">
-				    </td>
-				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section2" min="0" placeholder="000000">
-				    </td>
-				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy2" size="5"><br>
-				    </td>
-				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit2" min="0">
-				    </td>
-				    <td>
-				    	<input type="text" id="teacher" name="teacher2"><br>
-				    </td>
-				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher2"><br>
-				    </td>
-				  </tr>
-				  <tr>
-				    <td>3.</td>
-				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId3">
-	  				</td>
-				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject3" size="7">
-				    </td>
-				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section3" min="0" placeholder="000000">
-				    </td>
-				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy3" size="5"><br>
-				    </td>
-				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit3" min="0">
-				    </td>
-				    <td>
-				    	<input type="text" id="teacher" name="teacher3"><br>
-				    </td>
-				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher3"><br>
-				    </td>
-				  </tr>
-				  <tr>
-				    <td>4.</td>
-				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId4">
-	  				</td>
-				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject4" size="7">
-				    </td>
-				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section4" min="0" placeholder="000000">
-				    </td>
-				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy4" size="5"><br>
-				    </td>
-				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit4" min="0">
-				    </td>
-				    <td>
-				    	<input type="text" id="teacher" name="teacher4"><br>
-				    </td>
-				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher4"><br>
-				    </td>
-				  </tr>
-				  <tr>
-				    <td>5.</td>
-				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId5">
-	  				</td>
-				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject5" size="7">
-				    </td>
-				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section5" min="0" placeholder="000000">
-				    </td>
-				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy5" size="5"><br>
-				    </td>
-				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit5" min="0">
-				    </td>
-				    <td>
-				    	<input type="text" id="teacher" name="teacher5"><br>
-				    </td>
-				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher5"><br>
-				    </td>
-				  </tr>
-				  <tr>
-				    <td>6.</td>
-				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId6">
-	  				</td>
-				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject6" size="7">
-				    </td>
-				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section6" min="0" placeholder="000000">
-				    </td>
-				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy6" size="5"><br>
-				    </td>
-				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit6" min="0">
-				    </td>
-				    <td>
-				    	<input type="text" id="teacher" name="teacher6"><br>
-				    </td>
-				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher6"><br>
-				    </td>
-				  </tr>
-				  <tr>
-				    <td>7.</td>
-				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId7">
-	  				</td>
-				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject7" size="7">
-				    </td>
-				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section7" min="0" placeholder="000000">
-				    </td>
-				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy7" size="5"><br>
-				    </td>
-				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit7" min="0">
-				    </td>
-				    <td>
-				    	<input type="text" id="teacher" name="teacher7"><br>
-				    </td>
-				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher7"><br>
-				    </td>
-				  </tr>
-				  				  <tr>
-				    <td>8.</td>
-				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId8">
-	  				</td>
-				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject8" size="7">
-				    </td>
-				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section8" min="0" placeholder="000000">
-				    </td>
-				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy8" size="5"><br>
-				    </td>
-				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit8" min="0">
-				    </td>
-				    <td>
-				    	<input type="text" id="teacher" name="teacher8"><br>
-				    </td>
-				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher8"><br>
-				    </td>
-				  </tr>
-				  <tr>
-				    <td>9.</td>
-				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId9">
-	  				</td>
-				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject9" size="7">
-				    </td>
-				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section9" min="0" placeholder="000000">
-				    </td>
-				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy9" size="5"><br>
-				    </td>
-				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit9" min="0">
-				    </td>
-				    <td>
-				    	<input type="text" id="teacher" name="teacher9"><br>
-				    </td>
-				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher9"><br>
-				    </td>
-				  </tr>
-				  <tr>
-				    <td>10.</td>
-				    <td>
-	  					<input style="width:60px;" type="text" id="subjectId" name="subjectId10">
-	  				</td>
-				    <td>
-				    	<input type="text" id="nameSubject" name="nameSubject10" size="7">
-				    </td>
-				    <td>
-				    	<input style="width:60px;" type="number" id="section" name="section10" min="0" placeholder="000000">
-				    </td>
-				    <td>
-				    	<input type="date" id="dateStudy" name="dateStudy10" size="5"><br>
-				    </td>
-				    <td>
-				    	<input style="width:10px;" type="number" id="unit" name="unit10" min="0">
-				    </td>
-				    <td>
-				    	<input type="text" id="teacher" name="teacher10"><br>
-				    </td>
-				    <td>
-				    	<input type="text" id="allowTeacher" name="allowTeacher10"><br>
-				    </td>
-				  </tr>
+				<br><br>
+				<table align="center">
+					<tr>
+						<th>ลำดับ</th>
+						<th>รหัสวิชา</th>
+						<th>ชื่อวิชา</th>
+						<th>Section</th>
+						<th>วันเวลาที่สอน</th>
+						<th>หน่วยกิต</th>
+						<th>ชื่อผู้สอน</th>
+						<th>ผู้สอนอนุญาต</th>
+					</tr>
+					<tr>
+						<td>1.</td>
+						<td>
+							<input style="width:40px;" type="text" id="subjectId" name="subjectId1">
+						</td>
+						<td>
+							<input type="text" id="nameSubject" name="nameSubject1" size="7">
+						</td>
+						<td>
+							<input style="width:50px;" type="number" id="section" name="section1" size="5" min="0">
+						</td>
+						<td>
+							<center>
+								<span style="font-size: 14px">วัน</span>
+								<select id="days" name="day1">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 14px">และวัน</span>
+								<select id="days" name="days1">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 9px">(ถ้ามี)</span>
+							</center>
+							<input style="height: 16px;" type="time" id="timeStart" name="timeStart1">
+							<span style="font-size: 14px">ถึง</span>
+							<input style="height: 16px;" type="time" id="timeEnd" name="timeEnd1">
+						</td>
+						<td>
+							<input style="width:15px;" type="number" id="unit" name="unit1" min="0">
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher1"><br>
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher1"><br>
+						</td>
+					</tr>
+					<tr>
+						<td>2.</td>
+						<td>
+							<input style="width:40px;" type="text" id="subjectId" name="subjectId2">
+						</td>
+						<td>
+							<input type="text" id="nameSubject" name="nameSubject2" size="7">
+						</td>
+						<td>
+							<input style="width:50px;" type="number" id="section" name="section2" min="0">
+						</td>
+						<td>
+							<center>
+								<span style="font-size: 14px">วัน</span>
+								<select id="days" name="day2">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 14px">และวัน</span>
+								<select id="days" name="days2">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 9px">(ถ้ามี)</span>
+							</center>
+							<input style="height: 16px;" type="time" id="timeStart" name="timeStart2">
+							<span style="font-size: 14px">ถึง</span>
+							<input style="height: 16px;" type="time" id="timeEnd" name="timeEnd2">
+						</td>
+						<td>
+							<input style="width:15px;" type="number" id="unit" name="unit2" min="0">
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher2"><br>
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher2"><br>
+						</td>
+					</tr>
+					<tr>
+						<td>3.</td>
+						<td>
+							<input style="width:40px;" type="text" id="subjectId" name="subjectId3">
+						</td>
+						<td>
+							<input type="text" id="nameSubject" name="nameSubject3" size="7">
+						</td>
+						<td>
+							<input style="width:50px;" type="number" id="section" name="section3" min="0">
+						</td>
+						<td>
+							<center>
+								<span style="font-size: 14px">วัน</span>
+								<select id="days" name="day3">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 14px">และวัน</span>
+								<select id="days" name="days3">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 9px">(ถ้ามี)</span>
+							</center>
+							<input style="height: 16px;" type="time" id="timeStart" name="timeStart3">
+							<span style="font-size: 14px">ถึง</span>
+							<input style="height: 16px;" type="time" id="timeEnd" name="timeEnd3">
+						</td>
+						<td>
+							<input style="width:15px;" type="number" id="unit" name="unit3" min="0">
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher3"><br>
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher3"><br>
+						</td>
+					</tr>
+					<tr>
+						<td>4.</td>
+						<td>
+							<input style="width:40px;" type="text" id="subjectId" name="subjectId4">
+						</td>
+						<td>
+							<input type="text" id="nameSubject" name="nameSubject4" size="7">
+						</td>
+						<td>
+							<input style="width:50px;" type="number" id="section" name="section4" min="0">
+						</td>
+						<td>
+							<center>
+								<span style="font-size: 14px">วัน</span>
+								<select id="days" name="day4">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 14px">และวัน</span>
+								<select id="days" name="days4">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 9px">(ถ้ามี)</span>
+							</center>
+							<input style="height: 16px;" type="time" id="timeStart" name="timeStart4">
+							<span style="font-size: 14px">ถึง</span>
+							<input style="height: 16px;" type="time" id="timeEnd" name="timeEnd4">
+						</td>
+						<td>
+							<input style="width:15px;" type="number" id="unit" name="unit4" min="0">
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher4"><br>
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher4"><br>
+						</td>
+					</tr>
+					<tr>
+						<td>5.</td>
+						<td>
+							<input style="width:40px;" type="text" id="subjectId" name="subjectId5">
+						</td>
+						<td>
+							<input type="text" id="nameSubject" name="nameSubject5" size="7">
+						</td>
+						<td>
+							<input style="width:50px;" type="number" id="section" name="section5" min="0">
+						</td>
+						<td>
+							<center>
+								<span style="font-size: 14px">วัน</span>
+								<select id="days" name="day5">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 14px">และวัน</span>
+								<select id="days" name="days5">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 9px">(ถ้ามี)</span>
+							</center>
+							<input style="height: 16px;" type="time" id="timeStart" name="timeStart5">
+							<span style="font-size: 14px">ถึง</span>
+							<input style="height: 16px;" type="time" id="timeEnd" name="timeEnd5">
+						</td>
+						<td>
+							<input style="width:15px;" type="number" id="unit" name="unit5" min="0">
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher5"><br>
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher5"><br>
+						</td>
+					</tr>
+					<tr>
+						<td>6.</td>
+						<td>
+							<input style="width:40px;" type="text" id="subjectId" name="subjectId6">
+						</td>
+						<td>
+							<input type="text" id="nameSubject" name="nameSubject6" size="7">
+						</td>
+						<td>
+							<input style="width:50px;" type="number" id="section" name="section6" min="0">
+						</td>
+						<td>
+							<center>
+								<span style="font-size: 14px">วัน</span>
+								<select id="days" name="day6">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 14px">และวัน</span>
+								<select id="days" name="days6">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 9px">(ถ้ามี)</span>
+							</center>
+							<input style="height: 16px;" type="time" id="timeStart" name="timeStart6">
+							<span style="font-size: 14px">ถึง</span>
+							<input style="height: 16px;" type="time" id="timeEnd" name="timeEnd6">
+						</td>
+						<td>
+							<input style="width:15px;" type="number" id="unit" name="unit6" min="0">
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher6"><br>
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher6"><br>
+						</td>
+					</tr>
+					<tr>
+						<td>7.</td>
+						<td>
+							<input style="width:40px;" type="text" id="subjectId" name="subjectId7">
+						</td>
+						<td>
+							<input type="text" id="nameSubject" name="nameSubject7" size="7">
+						</td>
+						<td>
+							<input style="width:50px;" type="number" id="section" name="section7" min="0">
+						</td>
+						<td>
+							<center>
+								<span style="font-size: 14px">วัน</span>
+								<select id="days" name="day7">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 14px">และวัน</span>
+								<select id="days" name="days7">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 9px">(ถ้ามี)</span>
+							</center>
+							<input style="height: 16px;" type="time" id="timeStart" name="timeStart7">
+							<span style="font-size: 14px">ถึง</span>
+							<input style="height: 16px;" type="time" id="timeEnd" name="timeEnd7">
+						</td>
+						<td>
+							<input style="width:15px;" type="number" id="unit" name="unit7" min="0">
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher7"><br>
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher7"><br>
+						</td>
+					</tr>
+					<tr>
+						<td>8.</td>
+						<td>
+							<input style="width:40px;" type="text" id="subjectId" name="subjectId8">
+						</td>
+						<td>
+							<input type="text" id="nameSubject" name="nameSubject8" size="7">
+						</td>
+						<td>
+							<input style="width:50px;" type="number" id="section" name="section8" min="0">
+						</td>
+						<td>
+							<center>
+								<span style="font-size: 14px">วัน</span>
+								<select id="days" name="day8">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 14px">และวัน</span>
+								<select id="days" name="days8">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 9px">(ถ้ามี)</span>
+							</center>
+							<input style="height: 16px;" type="time" id="timeStart" name="timeStart8">
+							<span style="font-size: 14px">ถึง</span>
+							<input style="height: 16px;" type="time" id="timeEnd" name="timeEnd8">
+						</td>
+						<td>
+							<input style="width:15px;" type="number" id="unit" name="unit8" min="0">
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher8"><br>
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher8"><br>
+						</td>
+					</tr>
+					<tr>
+						<td>9.</td>
+						<td>
+							<input style="width:40px;" type="text" id="subjectId" name="subjectId9">
+						</td>
+						<td>
+							<input type="text" id="nameSubject" name="nameSubject9" size="7">
+						</td>
+						<td>
+							<input style="width:50px;" type="number" id="section" name="section9" min="0">
+						</td>
+						<td>
+							<center>
+								<span style="font-size: 14px">วัน</span>
+								<select id="days" name="day9">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 14px">และวัน</span>
+								<select id="days" name="days9">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 9px">(ถ้ามี)</span>
+							</center>
+							<input style="height: 16px;" type="time" id="timeStart" name="timeStart9">
+							<span style="font-size: 14px">ถึง</span>
+							<input style="height: 16px;" type="time" id="timeEnd" name="timeEnd9">
+						</td>
+						<td>
+							<input style="width:15px;" type="number" id="unit" name="unit9" min="0">
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher9"><br>
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher9"><br>
+						</td>
+					</tr>
+					<tr>
+						<td>10.</td>
+						<td>
+							<input style="width:40px;" type="text" id="subjectId" name="subjectId10">
+						</td>
+						<td>
+							<input type="text" id="nameSubject" name="nameSubject10" size="7">
+						</td>
+						<td>
+							<input style="width:50px;" type="number" id="section" name="section10" min="0">
+						</td>
+						<td>
+							<center>
+								<span style="font-size: 14px">วัน</span>
+								<select id="days" name="day10">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 14px">และวัน</span>
+								<select id="days" name="days10">
+									<option value="">-</option>
+									<option value="Sun">อาทิตย์</option>
+									<option value="Mon">จันทร์</option>
+									<option value="Tue">อังคาร</option>
+									<option value="Wed">พุธ</option>
+									<option value="Thu">พฤหัสบดี</option>
+									<option value="Fri">ศุกร์</option>
+									<option value="Sat">เสาร์</option>
+								</select>
+								<span style="font-size: 9px">(ถ้ามี)</span>
+							</center>
+							<input style="height: 16px;" type="time" id="timeStart" name="timeStart10">
+							<span style="font-size: 14px">ถึง</span>
+							<input style="height: 16px;" type="time" id="timeEnd" name="timeEnd10">
+						</td>
+						<td>
+							<input style="width:15px;" type="number" id="unit" name="unit10" min="0">
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher10"><br>
+						</td>
+						<td>
+							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher10"><br>
+						</td>
+					</tr>
 				</table>
 				<br>
-	  			
-	  			เหตุผลที่ขอ<label for="add">เพิ่ม </label>(
-	  					<input type="radio" id="add" name="option" value="true">	  
-						) / <label for="remove">ถอน </label>(
-						<input type="radio" id="remove" name="option" value="false">
-						)<br>
-				เพราะ<br>
-				<textarea name="reason" id="reason" cols="50" rows="4"></textarea>
-	  			<br><br>
-	  			<input style="margin-left: 49%" id="submit" type="submit" value="Submit">
-			</h4>
-		</form>
-	</div>
-</body>
+				
+				เหตุผลที่ขอ<label for="add">เพิ่ม </label>(
+				<input type="radio" id="add" name="option" value="true">
+				) / <label for="remove">ถอน </label>(
+				<input type="radio" id="remove" name="option" value="false">
+				)<br>
+				<textarea name="reason" id="reason" cols="100" rows="4" style="border-radius: 8px;border: 2px solid transparent;" placeholder="เพราะ..."></textarea>
+				<br><br>
+				<center>
+					<button class="form-submit-button">
+						<input style="background-color: transparent;border-color: transparent;font-size: 25px;color: dimgrey;" id="submit" type="submit" value="Submit">
+					</button>
+				</center>
+				</h4>
+			</form>
+		</div>
+	</body>
 </html>
