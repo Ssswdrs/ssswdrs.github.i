@@ -4,12 +4,20 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>คำร้องขอเพิ่มถอนรายวิชา</title>
+		<link rel="icon" type="image/x-icon" href="tu.ico">
 		<style>
 			@import 'https://fonts.googleapis.com/css?family=Prompt';
+			.table {
+			border-collapse: collapse;
+			width: 100%;
+			border-top-left-radius: 15px;
+			border-top-right-radius: 15px;
+  			overflow: hidden;
+			}
+
 			table {
 			border-collapse: collapse;
 			width: 100%;
-			border-radius: 15px;
   			overflow: hidden;
 			}
 
@@ -22,14 +30,44 @@
 			tr:nth-child(even) {
 			background-color: rgba(173, 207, 159, .7);
 			}
+
 			tr:nth-child(odd) {
 			background-color: rgba(206, 216, 158, .7);
 			}
+
 			tr:nth-child(1) {
 				background-color: rgba(118, 186, 153, .7);
 			}
+
+			td:nth-child(2) {
+				width: 106px;
+			}
+			td:nth-child(3) {
+				width: 88px;
+			}
+
+			td:nth-child(4) {
+				width: 113px;
+			}
+
+			td:nth-child(5) {
+				width: 176px;
+			}
+
+			td:nth-child(6) {
+				width: 118px;
+			}
+
+			td:nth-child(7) {
+				width: 118px;
+			}
+
 			td:last-child,th:last-child{
 				border-right: none;
+			}
+			
+			td:first-child{
+				width: 76px;
 			}
 			body {
 				background-image: url("puey.jpg");
@@ -50,6 +88,7 @@
 			input {
 				border: 1px solid #FFF5E1;
 				border-radius: 5px;
+				width: 60px;
 				outline:0;
 				padding-left:5px;
 				padding-right:5px;
@@ -75,11 +114,12 @@
 				border-radius: 20px;
 				border:1px solid rgba(255, 255, 255, 0.18);
 				box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-				margin: 1%;
 				padding-left: 20px;
 				padding-right: 20px;
 				padding-top: 20px;
 				padding-bottom: 20px;
+				font-size: 20px; 
+				<!--1.3vw-->
 			}
 			
 		.form-submit-button {
@@ -92,7 +132,7 @@
 			cursor:pointer;
 			color:#777777;
 			font-family:Arial;
-			font-size:15px;
+			font-size:2vw;
 			font-weight:bold;
 			padding:6px 24px;
 			text-decoration:none;
@@ -134,11 +174,77 @@
 		    text-shadow: 1px 1px 1px #919191,
 		        1px 2px 1px #919191,
 		        1px 3px 1px #919191,
-		    1px 18px 6px rgba(16,16,16,0.4),
-		    1px 22px 10px rgba(16,16,16,0.2),
-		    1px 25px 35px rgba(16,16,16,0.2),
-		    1px 30px 60px rgba(16,16,16,0.4);
+		    	1px 18px 6px rgba(16,16,16,0.4),
+		    	1px 22px 10px rgba(16,16,16,0.2),
+		    	1px 25px 35px rgba(16,16,16,0.2),
+		    	1px 30px 60px rgba(16,16,16,0.4);
 		}
+
+		
+.value-button {
+  display: inline-block;
+  border: 1px solid #ddd;
+  margin: 0px;
+  width: 30px;
+  height: 20px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 5px 0;
+  background: grey;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 20px;
+  font-size: 25px;
+}
+
+.value-button:hover {
+  cursor: pointer;
+}
+
+form #decrease {
+  margin-right: -4px;
+  border-radius: 8px 3px 3px 8px;
+}
+
+form #increase {
+  margin-left: -4px;
+  border-radius: 3px 8px 8px 3px;
+}
+
+form #input-wrap {
+  margin: 0px;
+  padding: 0px;
+}
+
+input#numberAdd {
+  text-align: center;
+  border: none;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin: 0px;
+  width: 30px;
+  height: 30px;
+}
+
+input#numberRemove {
+  text-align: center;
+  border: none;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin: 0px;
+  width: 30px;
+  height: 30px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 		</style>
 	</head>
@@ -153,7 +259,7 @@
 			<center class="subHeader">
 			<h3 style="color:#F1F6F9;">คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยธรรมศาสตร์ ศูนย์รังสิต</h3>
 			</center>
-			<form action="/action_page.php">
+			<form id="input-form">
 				<h4 style="color:#F1F6F9;" class="glass">
 				<div class="date">
 					<label for="fname">วันที่:</label>
@@ -161,8 +267,8 @@
 				</div>
 				<label for="topic">เรื่อง:</label>
 				<input style="width:30%" type="text" id="topic" name="topic"><br>
-				เรียน <span style="font-size:14px">คณบดีคณะวิทยาศาสตร์และเทคโนโลยี</span><br><br>
-				สิ่งที่ส่งมาด้วย <span style="font-size:14px">ผลการจดทะเบียนทุกภาคเรียนจากเว็บสำนักทะเบียน</span><br><br>
+				เรียน <span style="font-size:1.2vw">คณบดีคณะวิทยาศาสตร์และเทคโนโลยี</span><br><br>
+				สิ่งที่ส่งมาด้วย <span style="font-size:1.2vw">ผลการจดทะเบียนทุกภาคเรียนจากเว็บสำนักทะเบียน</span><br><br>
 				<fieldset style="border-radius: 10px">
 				&emsp;&emsp;<label for="prefix">คำนำหน้าชื่อ:</label>
 				<select id="prefix" name="prefix">
@@ -171,13 +277,13 @@
 					<option value="miss">นางสาว</option>
 					<option value="mrs">นาง</option>
 				</select>
-				<label for="fname">ชื่อ*:</label>
+				<label for="fname">ชื่อ<span style="color: red">*</span>:</label>
 				<input style="width: 20%;" type="text" id="fname" name="fname" placeholder="Name" required>
-				<label for="lname">นามสกุล*:</label>
+				<label for="lname">นามสกุล<span style="color: red">*</span>:</label>
 				<input style="width: 20%;" type="text" id="lname" name="lname" placeholder="Surname" required>
-				<label for="studentId">เลขทะเบียน*:</label>
+				<label for="studentId">เลขทะเบียน<span style="color: red">*</span>:</label>
 				<input style="width: 15%;" type="number" id="studentId" name="studentId" min="0" required><br>
-				&nbsp;<label for="studentYear">ชั้นปีที่*:</label>
+				&nbsp;<label for="studentYear">ชั้นปีที่<span style="color: red">*</span>:</label>
 				<select id="studentYear" name="studentYear" required>
 					<option value="">-</option>
 					<option value="1">1</option>
@@ -187,9 +293,8 @@
 					<option value="5">5</option>
 					<option value="6">6</option>
 					<option value="7">7</option>
-					<option value="8">8</option>
 				</select>
-				&nbsp;<label for="subject">สาขาวิชา*:</label>
+				&nbsp;<label for="subject">สาขาวิชา<span style="color: red">*</span>:</label>
 				<input style="width: 30%;" type="text" id="subject" name="subject" size="50" required><br>
 					<fieldset style="border-radius: 10px">
 						<legend>ที่อยู่ที่สามารถติดต่อได้ทางไปรษณีย์</legend>
@@ -205,50 +310,25 @@
 						<input type="text" id="county" name="county">
 						&nbsp;<label for="zipcode">รหัสไปรษณีย์:</label>
 						<input style="width:50px;" type="text" id="zipcode" name="zipcode" min="0" maxlength="5"><br>
-						<label for="phoneNum">เบอร์โทรศัพท์มือถือ*:</label>
+						<label for="phoneNum">เบอร์โทรศัพท์มือถือ<span style="color: red">*</span>:</label>
 						<input type="number" id="phoneNum" name="phoneNum" min="0" style="width: 80px;" required>
-						&nbsp;<label for="homeNum">เบอร์โทรศัพท์บ้าน*:</label>
+						&nbsp;<label for="homeNum">เบอร์โทรศัพท์บ้าน<span style="color: red">*</span>:</label>
 						<input type="number" id="homeNum" name="homeNum" min="0" style="width: 80px;" required>
-						&nbsp;<label for="adviser">อาจารย์ที่ปรึกษา*:</label>
-						<input type="text" id="adviser" name="adviser" style="width: 170px;" required>
+						&nbsp;<label for="adviser">อาจารย์ที่ปรึกษา<span style="color: red">*</span>:</label>
+						<input type="text" id="advisor" name="advisor" style="width: 170px;" required>
 					</fieldset>
 				</fieldset>
 				<br>
-				*มีความประสงค์ขอ<label for="add">เพิ่ม </label>(
-				<input type="radio" id="add" name="req" value="true" required>
+				<!--มีความประสงค์ขอ<label for="add">เพิ่ม </label>(
+				<input type="radio" id="add" name="req" value="true">
 				) / <label for="remove">ถอน </label>(
 				<input type="radio" id="remove" name="req" value="false">
-				) ดังรายการต่อไปนี้<br>
-				<label for="addSub">จำนวนวิชาขอเพิ่มวิชา:</label>
-				<select name="addSub" id="addSub">
-					<option value="0">0</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-				</select>
-				<label for="removeSub">จำนวนวิชาขอถอนวิชา:</label>
-				<select name="removeSub" id="addSub">
-					<option value="0">0</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-				</select>
-				<br><br>
-				<table align="center">
+				) ดังรายการต่อไปนี้<br>-->
+				<label for="addSub">จำนวนวิชาขอเพิ่มวิชา</label>
+				<div class="value-button" id="decrease" onclick="decreaseValueAdd()" value="Decrease Value">-</div>
+				<input type="number" id="numberAdd" value="0" />
+				<div class="value-button" id="increase" onclick="increaseValueAdd()" value="Increase Value">+</div>
+				<table class="table" align="center" style="margin-top: 3px;">
 					<tr>
 						<th>ลำดับ</th>
 						<th>รหัสวิชา</th>
@@ -259,7 +339,26 @@
 						<th>ชื่อผู้สอน</th>
 						<th>ผู้สอนอนุญาต</th>
 					</tr>
+				</table>
+				<div class="infoTable" id="addTable"></div>
+				<br>
+				<label for="removeSub">จำนวนวิชาขอถอนวิชา</label>
+				<div class="value-button" id="decrease" onclick="decreaseValueRemove('table')" value="Decrease Value">-</div>
+			  <input type="number" id="numberRemove" value="0" />
+			  <div class="value-button" id="increase" onclick="increaseValueRemove('table')" value="Increase Value">+</div>
+				<br>
+				<table class="table" id="table" align="center" style="margin-top: 3px;">
 					<tr>
+						<th>ลำดับ</th>
+						<th>รหัสวิชา</th>
+						<th>ชื่อวิชา</th>
+						<th>Section</th>
+						<th>วันเวลาที่สอน</th>
+						<th>หน่วยกิต</th>
+						<th>ชื่อผู้สอน</th>
+						<th>ผู้สอนอนุญาต</th>
+					</tr>
+					<!--<tr>
 						<td>1.</td>
 						<td>
 							<input style="width:40px;" type="text" id="subjectId" name="subjectId1">
@@ -304,10 +403,10 @@
 							<input style="width:15px;" type="number" id="unit" name="unit1" min="0">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="teacher" name="teacher1"><br>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher1">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher1"><br>
+							<input type="checkbox" id="allowTeacher" name="allowTeacher1" value="true">
 						</td>
 					</tr>
 					<tr>
@@ -355,10 +454,10 @@
 							<input style="width:15px;" type="number" id="unit" name="unit2" min="0">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="teacher" name="teacher2"><br>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher2">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher2"><br>
+							<input type="checkbox" id="allowTeacher" name="allowTeacher2" value="true">
 						</td>
 					</tr>
 					<tr>
@@ -406,10 +505,10 @@
 							<input style="width:15px;" type="number" id="unit" name="unit3" min="0">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="teacher" name="teacher3"><br>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher3">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher3"><br>
+							<input type="checkbox" id="allowTeacher" name="allowTeacher3" value="true">
 						</td>
 					</tr>
 					<tr>
@@ -457,10 +556,10 @@
 							<input style="width:15px;" type="number" id="unit" name="unit4" min="0">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="teacher" name="teacher4"><br>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher4">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher4"><br>
+							<input type="checkbox" id="allowTeacher" name="allowTeacher4" value="true">
 						</td>
 					</tr>
 					<tr>
@@ -511,7 +610,7 @@
 							<input style="width: 120px;" type="text" id="teacher" name="teacher5"><br>
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher5"><br>
+							<input type="checkbox" id="allowTeacher" name="allowTeacher5" value="true">
 						</td>
 					</tr>
 					<tr>
@@ -559,10 +658,10 @@
 							<input style="width:15px;" type="number" id="unit" name="unit6" min="0">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="teacher" name="teacher6"><br>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher6">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher6"><br>
+							<input type="checkbox" id="allowTeacher" name="allowTeacher6" value="true">
 						</td>
 					</tr>
 					<tr>
@@ -610,10 +709,10 @@
 							<input style="width:15px;" type="number" id="unit" name="unit7" min="0">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="teacher" name="teacher7"><br>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher7">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher7"><br>
+							<input type="checkbox" id="allowTeacher" name="allowTeacher7" value="true">
 						</td>
 					</tr>
 					<tr>
@@ -661,10 +760,10 @@
 							<input style="width:15px;" type="number" id="unit" name="unit8" min="0">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="teacher" name="teacher8"><br>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher8">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher8"><br>
+							<input type="checkbox" id="allowTeacher" name="allowTeacher8" value="true">
 						</td>
 					</tr>
 					<tr>
@@ -712,10 +811,10 @@
 							<input style="width:15px;" type="number" id="unit" name="unit9" min="0">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="teacher" name="teacher9"><br>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher9">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher9"><br>
+							<input type="checkbox" id="allowTeacher" name="allowTeacher9" value="true">
 						</td>
 					</tr>
 					<tr>
@@ -763,29 +862,28 @@
 							<input style="width:15px;" type="number" id="unit" name="unit10" min="0">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="teacher" name="teacher10"><br>
+							<input style="width: 120px;" type="text" id="teacher" name="teacher10">
 						</td>
 						<td>
-							<input style="width: 120px;" type="text" id="allowTeacher" name="allowTeacher10"><br>
+							<input type="checkbox" id="allowTeacher" name="allowTeacher10" value="true">
 						</td>
-					</tr>
+					</tr>-->
 				</table>
-				<br>
-				
-				เหตุผลที่ขอ<label for="add">เพิ่ม </label>(
-				<input type="radio" id="add" name="option" value="true">
-				) / <label for="remove">ถอน </label>(
-				<input type="radio" id="remove" name="option" value="false">
-				)<br>
-				<textarea name="reason" id="reason" cols="100" rows="4" style="border-radius: 8px;border: 2px solid transparent;" placeholder="เพราะ..."></textarea>
+				<div class="infoTable" id="removeTable"></div>
+				<p>เหตุผลที่ขอเพิ่ม-ถอนรายวิชา</p>
+				<textarea name="reason" id="reason" cols="100" rows="5" style="border-radius: 8px;border: 2px solid transparent;" placeholder="เพราะ..."></textarea>
 				<br><br>
+				<p id="json"></p>
 				<center>
-					<button class="form-submit-button">
-						<input style="background-color: transparent;border-color: transparent;font-size: 25px;color: dimgrey;" id="submit" type="submit" value="Submit">
+						<button class="form-submit-button" onclick="">
+						<input style="background-color: transparent;border-color: transparent;font-size: 25px;color: dimgrey;font-size: 2vw;width: 85px;" id="submit" type="submit" value="Submit">
 					</button>
 				</center>
 				</h4>
 			</form>
 		</div>
 	</body>
+	<script src="controller.js">
+		
+	</script>
 </html>
