@@ -79,6 +79,7 @@
 			input:focus {
 				  background-color: #F5EDDC;
 				  border-color: #DF7861;
+				  transition: 0.3s;
 			}
 
 			.table{
@@ -86,7 +87,7 @@
 			}
 
 			.date {
-				margin-left: 84%;
+				margin-left: 85%;
 			}
 			.glass {
 				background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
@@ -100,7 +101,6 @@
 				padding-top: 20px;
 				padding-bottom: 20px;
 				font-size: 16px; 
-				<!--1.3vw-->
 			}
 			
 		.form-submit-button {
@@ -227,9 +227,72 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
+.indicator
+{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+
+}
+
+#toggle {
+	position: relative;
+	display: block;
+	width: 30px;
+	height: 15px;
+	border-radius: 15px;
+	background: #222;
+	transition: 0.5s;
+	cursor: pointer;
+	box-shadow: inset 0 8px 60px rgba(0,0,0,0.1),
+							inset 0 8px 8px rgba(0,0,0,0.1),
+							inset 0 -4px 4px rgba(0,0,0,0.1);
+}
+
+#toggle .indicator {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 15px;
+	height: 15px;
+	background: linear-gradient(to bottom, #444, #222);
+	border-radius: 50%;
+	transform: scale(0.9);
+	box-shadow: 0 8px 40px rgba(0,0,0,0.5),
+							inset 0 4px 4px rgba(255,255,255,0.2),
+							inset 0 -4px 4px rgba(255,255,255,0.2);
+	transition: 0.5s;
+}
+
+#toggle.active .indicator{
+	left: 15px;
+	background: linear-gradient(to bottom, #eaeaea, #f9f9f9);
+	transform: scale(0.9);
+	box-shadow: 0 8px 20px rgba(0,0,0,0.1),
+							inset 0 4px 4px rgba(255,255,255,1),
+							inset 0 -4px 4px rgba(255,255,255,1);
+	transition: 0.5s;
+}
+
+#toggle.active{
+	background: #fff;
+	box-shadow: 0 2px 60px rgba(0,0,0,0.1),
+							inset 0 2px 8px rgba(0,0,0,0.1),
+							inset 0 -4px 8px rgba(0,0,0,0.05);
+}
+
+body.active{
+	background: #131417;
+}
+
+
+
 		</style>
 	</head>
 	<body bgcolor="black">
+		<div id="toggle" style="margin-left: 98%;">
+			<i class="indicator"></i>
+		</div>
 		<div id="glass">
 			<div id="logo" align="center" style="padding-top: 15px;">
 				<img src="tu.png" height="160" width="160">
@@ -243,18 +306,19 @@ input[type=number]::-webkit-outer-spin-button {
 			<form id="input-form">
 				<h4 style="color:#F1F6F9;" class="glass">
 				<div class="date">
-					<label for="fname">วันที่<span style="color: red">*</span>:</label>
-					<input type="date" id="date" name="date" style="width: 100px;" required>
+					<label for="fname">วันที่:</label>
+					<label id="date" name="date" ></label>
 				</div>
 				<label for="topic">เรื่อง:</label>
 				<input style="width:30%" type="text" id="topic" name="topic"><br>
-				เรียน <span style="font-size:1.2vw">คณบดีคณะวิทยาศาสตร์และเทคโนโลยี</span><br><br>
-				สิ่งที่ส่งมาด้วย <span style="font-size:1.2vw">ผลการจดทะเบียนทุกภาคเรียนจากเว็บสำนักทะเบียน</span>
-				<input style="margin: unset;padding: unset;border: unset;border-radius: unset;width: 90px;" type="file" id="file" name="file">
+				เรียน <span style="font-size:14px">คณบดีคณะวิทยาศาสตร์และเทคโนโลยี</span><br><br>
+				สิ่งที่ส่งมาด้วย <span style="font-size:14px">ผลการจดทะเบียนทุกภาคเรียนจากเว็บสำนักทะเบียน</span>
+				<input style="margin: unset;padding: unset;border: unset;border-radius: unset;width: 250px;" type="file" id="file" name="file" onchange="return fileValidation()">
 				<br><br>
 				<fieldset style="border-radius: 10px">
 					<legend style="margin-left: 9px;">ประวัตินักศึกษา</legend>
-				&emsp;&emsp;<label for="prefix">คำนำหน้าชื่อ<span style="color: red">*</span>:</label>
+					<div style="margin-bottom: 5px;">
+						&emsp;&emsp;<label for="prefix">คำนำหน้าชื่อ<span style="color: red">*</span>:</label>
 				<select id="prefix" name="prefix" required>
 					<option value="">-</option>
 					<option value="mr">นาย</option>
@@ -267,7 +331,9 @@ input[type=number]::-webkit-outer-spin-button {
 				<input style="width: 20%;" type="text" id="lname" name="lname" placeholder="Surname" required>
 				<label for="studentId">เลขทะเบียน<span style="color: red">*</span>:</label>
 				<input style="width: 10%;" type="text" id="studentId" name="studentId" maxlength="10" pattern="[0-9]{10}" title="โปรดกรอกเลขทะเบียนให้ถูกต้อง" required><br>
-				&nbsp;<label for="studentYear">ชั้นปีที่<span style="color: red">*</span>:</label>
+					</div>
+				<div style="margin-bottom: 5px;">
+					&nbsp;<label for="studentYear">ชั้นปีที่<span style="color: red">*</span>:</label>
 				<select id="studentYear" name="studentYear" required>
 					<option value="">-</option>
 					<option value="1">1</option>
@@ -280,9 +346,12 @@ input[type=number]::-webkit-outer-spin-button {
 				</select>
 				&nbsp;<label for="subject">สาขาวิชา<span style="color: red">*</span>:</label>
 				<input style="width: 30%;" type="text" id="subject" name="subject" size="50" required><br>
+				</div>
+				
 					<fieldset style="border-radius: 10px">
 						<legend>ที่อยู่ที่สามารถติดต่อได้ทางไปรษณีย์</legend>
-						<label for="numHome">บ้านเลขที่<span style="color: red">*</span>:</label>
+						<div style="margin-bottom: 5px;">
+							<label for="numHome">บ้านเลขที่<span style="color: red">*</span>:</label>
 						<input style="width:50px;" type="text" id="numHome" name="numHome" required>
 						&nbsp;<label for="moo">หมู่ที่<span style="color: red">*</span>:</label>
 						<input style="width:50px;" type="number" id="moo" name="moo" min="0" required>
@@ -290,16 +359,21 @@ input[type=number]::-webkit-outer-spin-button {
 						<input style="width: 120px" type="text" id="tambon" name="tambon" required>
 						&nbsp;<label for="aumper">อำเภอ<span style="color: red">*</span>:</label>
 						<input style="width: 120px" type="text" id="aumper" name="aumper" required><br>
-						<label for="county">จังหวัด<span style="color: red">*</span>:</label>
+						</div>
+						<div style="margin-bottom: 5px;">
+							<label for="county">จังหวัด<span style="color: red">*</span>:</label>
 						<input style="width: 170px" type="text" id="county" name="county" required>
 						&nbsp;<label for="zipcode">รหัสไปรษณีย์<span style="color: red">*</span>:</label>
 						<input style="width:50px;" type="text" id="zipcode" name="zipcode" maxlength="5" pattern="[0-9]{5}" title="โปรดกรอกรหัสไปรษณีย์ให้ถูกต้อง" required><br>
-						<label for="phoneNum">เบอร์โทรศัพท์มือถือ<span style="color: red">*</span>:</label>
-						<input type="text" id="phoneNum" name="phoneNum" style="width: 90px;" maxlength="10" pattern="[0]{1}[0-9]{9}" title="โปรดกรอกเบอร์โทรศัพท์มือถือให้ถูกต้อง" required>
-						&nbsp;<label for="homeNum">เบอร์โทรศัพท์บ้าน:</label>
-						<input type="number" id="homeNum" name="homeNum" min="0" style="width: 90px;">
-						&nbsp;<label for="adviser">อาจารย์ที่ปรึกษา<span style="color: red">*</span>:</label>
-						<input type="text" id="advisor" name="advisor" style="width: 170px;" required>
+						</div>
+						<div style="margin-bottom: 5px;">
+							<label for="phoneNum">เบอร์โทรศัพท์มือถือ<span style="color: red">*</span>:</label>
+							<input type="text" id="phoneNum" name="phoneNum" style="width: 90px;" maxlength="10" pattern="[0]{1}[0-9]{9}" title="โปรดกรอกเบอร์โทรศัพท์มือถือให้ถูกต้อง" required>
+							&nbsp;<label for="homeNum">เบอร์โทรศัพท์บ้าน:</label>
+							<input type="number" id="homeNum" name="homeNum" min="0" style="width: 90px;">
+							&nbsp;<label for="adviser">อาจารย์ที่ปรึกษา<span style="color: red">*</span>:</label>
+							<input type="text" id="advisor" name="advisor" style="width: 170px;" required>
+						</div>
 					</fieldset>
 				</fieldset>
 				<br>
@@ -338,13 +412,16 @@ input[type=number]::-webkit-outer-spin-button {
 					</tr>
 					
 				</table>
-				<p>เหตุผลที่ขอเพิ่ม-ถอนรายวิชา<span style="color: red">*</span>:</p>
-				<textarea name="reason" id="reason" cols="100" rows="5" style="border-radius: 8px;border: 2px solid transparent;" placeholder="เพราะ..." required></textarea>
+				<br>
+				<fieldset style="border-radius: 10px">
+					<legend>เหตุผลที่ขอเพิ่ม-ถอนรายวิชา<span style="color: red">*</span>:</legend>
+					<textarea name="reason" id="reason" cols="100" rows="5" style="border-radius: 8px;border: 2px solid transparent;margin-top: 10px;" placeholder="เพราะ..." required></textarea>
+				</fieldset>
+				
 				<br><br>
-				<p id="json"></p>
 				<center>
 						<button class="form-submit-button">
-						<input style="background-color: transparent;border-color: transparent;font-size: 25px;color: dimgrey;width: 85px;" id="submit" type="submit" value="Submit" >
+						<input style="background-color: transparent;border-color: transparent;font-size: 25px;color: dimgrey;width: 85px;margin-right: 5px;" id="submit" type="submit" value="Submit" >
 					</button>
 				</center>
 				</h4>
