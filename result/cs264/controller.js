@@ -157,11 +157,6 @@ function checkBool (e){
   }
 }
 
-window.addEventListener('scroll', function(){
-  let value = window.scrollY;
-  document.getElementById('submit').style.fontSize = 4*value;
-
-})
 
 var correctForm = true;                                            
 
