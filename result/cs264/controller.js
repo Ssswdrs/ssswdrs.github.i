@@ -1,4 +1,5 @@
-
+/*Saksorn Sawatdeeraksa
+6409682884 */
 var valueAdd = parseInt(document.getElementById('numberAdd').value, 10);
 var valueRemove = parseInt(document.getElementById('numberRemove').value, 10);
 var addTable = document.getElementById('addTable');
@@ -29,11 +30,11 @@ function increaseValueAdd() {
   var cell7 = row.insertCell(6);
   var cell8 = row.insertCell(7);
   cell1.innerHTML = valueAdd;
-  cell2.innerHTML = '<input class="table" type="text" id="subjectId" name="subjectId" style="width: 40px;" />';
+  cell2.innerHTML = '<input class="table" type="text" id="subjectId" name="subjectId" style="width: 45px;" />';
   cell3.innerHTML = '<input class="table" type="text" id="nameSubject" name="nameSubject" style="width: 60px;" />';
   cell4.innerHTML = '<input class="table" type="text" id="section" name="section" style="width: 50px;" />';
-  cell5.innerHTML = '<span style="font-size: 14px">วัน</span><select id="day" name="day" required><option value="">-</option><option value="Sun">อาทิตย์</option><option value="Mon">จันทร์</option><option value="Tue">อังคาร</option><option value="Wed">พุธ</option><option value="Thu">พฤหัสบดี</option><option value="Fri">ศุกร์</option><option value="Sat">เสาร์</option></select><span style="font-size: 14px">&nbsp;และวัน&nbsp;</span><select id="days" name="days"><option value="">-</option><option value="Sun">อาทิตย์</option><option value="Mon">จันทร์</option><option value="Tue">อังคาร</option><option value="Wed">พุธ</option><option value="Thu">พฤหัสบดี</option><option value="Fri">ศุกร์</option><option value="Sat">เสาร์</option></select><span style="font-size: 9px">(ถ้ามี)</span></center><br><input class="table" style="height: 16px;width: 90px;" type="time" id="timeStart" name="timeStart" required><span style="font-size: 14px">&nbsp;ถึง&nbsp;</span><input class="table" style="height: 16px;width: 90px;" type="time" id="timeEnd" name="timeEnd" required>';
-  cell6.innerHTML = '<input class="table" type="text" id="credit" name="credit" style="width: 15px;" />';
+  cell5.innerHTML = '<span style="font-size: 14px">วัน&nbsp;</span><select id="day" name="day" required><option value="">-</option><option value="Sun">อาทิตย์</option><option value="Mon">จันทร์</option><option value="Tue">อังคาร</option><option value="Wed">พุธ</option><option value="Thu">พฤหัสบดี</option><option value="Fri">ศุกร์</option><option value="Sat">เสาร์</option></select><span style="font-size: 14px">&nbsp;และวัน&nbsp;</span><select id="days" name="days"><option value="">-</option><option value="Sun">อาทิตย์</option><option value="Mon">จันทร์</option><option value="Tue">อังคาร</option><option value="Wed">พุธ</option><option value="Thu">พฤหัสบดี</option><option value="Fri">ศุกร์</option><option value="Sat">เสาร์</option></select><span style="font-size: 9px">&nbsp;(ถ้ามี)</span></center><br><input class="table" style="height: 16px;width: 90px;" type="time" id="timeStart" name="timeStart" required><span style="font-size: 14px">&nbsp;ถึง&nbsp;</span><input class="table" style="height: 16px;width: 90px;" type="time" id="timeEnd" name="timeEnd" required>';
+  cell6.innerHTML = '<input class="table" type="text" id="credit" name="credit" style="width: 17px;" />';
   cell7.innerHTML = '<input class="table" type="text" id="teacher" name="teacher" style="width: 150px;" />';
   cell8.innerHTML = '<input class="table" type="checkbox" id="teacherCheck" name="teacherCheck" value="false" />';
 
@@ -80,11 +81,11 @@ function increaseValueRemove() {
   var cell7 = row.insertCell(6);
   var cell8 = row.insertCell(7);
   cell1.innerHTML = valueRemove;
-  cell2.innerHTML = '<input class="table" type="text" id="subjectIdr" name="subjectIdr" style="width: 40px;" />';
+  cell2.innerHTML = '<input class="table" type="text" id="subjectIdr" name="subjectIdr" style="width: 45px;" />';
   cell3.innerHTML = '<input class="table" type="text" id="nameSubjectr" name="nameSubjectr" style="width: 60px;" />';
   cell4.innerHTML = '<input class="table" type="text" id="sectionr" name="sectionr" style="width: 50px;" />';
-  cell5.innerHTML = '<span style="font-size: 14px">วัน</span><select id="dayr" name="dayr" required><option value="">-</option><option value="Sun">อาทิตย์</option><option value="Mon">จันทร์</option><option value="Tue">อังคาร</option><option value="Wed">พุธ</option><option value="Thu">พฤหัสบดี</option><option value="Fri">ศุกร์</option><option value="Sat">เสาร์</option></select><span style="font-size: 14px">&nbsp;และวัน&nbsp;</span><select id="daysr" name="daysr"><option value="">-</option><option value="Sun">อาทิตย์</option><option value="Mon">จันทร์</option><option value="Tue">อังคาร</option><option value="Wed">พุธ</option><option value="Thu">พฤหัสบดี</option><option value="Fri">ศุกร์</option><option value="Sat">เสาร์</option></select><span style="font-size: 9px">(ถ้ามี)</span></center><br><input class="table" style="height: 16px;width: 90px;" type="time" id="timeStartr" name="timeStartr" required><span style="font-size: 14px">&nbsp;ถึง&nbsp;</span><input class="table" style="height: 16px;width: 90px;" type="time" id="timeEndr" name="timeEndr" required>';
-  cell6.innerHTML = '<input class="table" type="text" id="creditr" name="creditr" style="width: 15px;" />';
+  cell5.innerHTML = '<span style="font-size: 14px">วัน&nbsp;</span><select id="dayr" name="dayr" required><option value="">-</option><option value="Sun">อาทิตย์</option><option value="Mon">จันทร์</option><option value="Tue">อังคาร</option><option value="Wed">พุธ</option><option value="Thu">พฤหัสบดี</option><option value="Fri">ศุกร์</option><option value="Sat">เสาร์</option></select><span style="font-size: 14px">&nbsp;และวัน&nbsp;</span><select id="daysr" name="daysr"><option value="">-</option><option value="Sun">อาทิตย์</option><option value="Mon">จันทร์</option><option value="Tue">อังคาร</option><option value="Wed">พุธ</option><option value="Thu">พฤหัสบดี</option><option value="Fri">ศุกร์</option><option value="Sat">เสาร์</option></select><span style="font-size: 9px">&nbsp;(ถ้ามี)</span></center><br><input class="table" style="height: 16px;width: 90px;" type="time" id="timeStartr" name="timeStartr" required><span style="font-size: 14px">&nbsp;ถึง&nbsp;</span><input class="table" style="height: 16px;width: 90px;" type="time" id="timeEndr" name="timeEndr" required>';
+  cell6.innerHTML = '<input class="table" type="text" id="creditr" name="creditr" style="width: 17px;" />';
   cell7.innerHTML = '<input class="table" type="text" id="teacherr" name="teacherr" style="width: 150px;" />';
   cell8.innerHTML = '<input class="table" type="checkbox" id="teacherCheckr" name="teacherCheckr" value="false" />';
   document.getElementsByName('subjectIdr')[0].setAttribute("name", "subjectIdr"+countDrop.toString());

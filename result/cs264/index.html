@@ -1,3 +1,5 @@
+<!-- Saksorn Sawatdeeraksa
+6409682884 -->
 <!DOCTYPE html>
 <html>
 	<head>
@@ -48,6 +50,7 @@
 				background-size: cover;
 				margin-left: 60px;
 				margin-right: 60px;
+				margin-bottom: 20px;
 				background-attachment: fixed;
 				background-position: center;
 				font-family: 'Prompt', sans-serif;
@@ -55,17 +58,27 @@
 		
 			select {
 				border: 1px solid #FFF5E1;
+				height: 25px;
 				border-radius: 5px;
 				outline:0;
+				background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+				border: 0.005px solid white;
+				border-bottom: transparent;
+				border-top: transparent;
 			}
 		
 			input {
 				border: 1px solid #FFF5E1;
 				border-radius: 5px;
 				width: 60px;
+				height: 25px;
 				outline:0;
 				padding-left:5px;
 				padding-right:5px;
+				background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+				border: 0.005px solid white;
+				border-bottom: transparent;
+				border-top: transparent;
 			}
 
 
@@ -84,6 +97,7 @@
 
 			.table{
 				text-align: center;
+				height: 25px;
 			}
 
 			.date {
@@ -228,6 +242,11 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
+
+input[type="text"] {
+    font-size:16px;
+}
+
 input#teacherCheck{
   cursor: pointer;
   height: 25px;
@@ -301,6 +320,21 @@ input#teacherCheckr{
 	
 }
 
+::placeholder { 
+  color: black;
+  opacity: 0.7;
+}
+
+:-ms-input-placeholder {
+  color: black;
+  opacity: 0.7;
+}
+
+::-ms-input-placeholder { 
+  color: black;
+  opacity: 0.3;
+}
+
 		</style>
 	</head>
 	<body bgcolor="dimgrey">
@@ -322,10 +356,10 @@ input#teacherCheckr{
 				</div>
 				<label for="topic">เรื่อง:</label>
 				<input style="width:30%" type="text" id="topic" name="topic"><br>
-				เรียน <span style="font-size:16px">คณบดีคณะวิทยาศาสตร์และเทคโนโลยี</span><br><br>
+				เรียน <span style="font-size:16px">คณบดีคณะวิทยาศาสตร์และเทคโนโลยี</span><br>
 				สิ่งที่ส่งมาด้วย <span style="font-size:16px">ผลการจดทะเบียนทุกภาคเรียนจากเว็บสำนักทะเบียน</span>
-				<input style="margin: unset;padding: unset;border: unset;border-radius: unset;width: 250px;" type="file" id="file" name="file" onchange="return fileValidation()">
-				<br><br>
+				<input style="margin: unset;padding: unset;border: unset;border-radius: 10px;width: 250px;" type="file" id="file" name="file" onchange="return fileValidation()">
+				<br>
 				<fieldset style="border-radius: 10px">
 					<legend style="margin-left: 9px;">ประวัตินักศึกษา</legend>
 					<div style="margin-bottom: 5px;">
@@ -392,8 +426,8 @@ input#teacherCheckr{
 				<div class="value-button" id="decrease" onclick="decreaseValueAdd()" value="Decrease Value">-</div>
 				<input type="number" id="numberAdd" value="0" />
 				<div class="value-button" id="increase" onclick="increaseValueAdd()" value="Increase Value">+</div>
-				<table id="addTable" align="center" style="margin-top: 3px;">
-					<tr>
+				<table id="addTable" align="center" style="margin-top: 5px;">
+					<tr style="font-size: 16px;">
 						<th>ลำดับ</th>
 						<th>รหัสวิชา</th>
 						<th>ชื่อวิชา</th>
@@ -410,7 +444,7 @@ input#teacherCheckr{
 			  <input type="number" id="numberRemove" value="0" />
 			  <div class="value-button" id="increase" onclick="increaseValueRemove()" value="Increase Value">+</div>
 				<br>
-				<table id="removeTable" align="center" style="margin-top: 3px;">
+				<table id="removeTable" align="center" style="margin-top: 5px;">
 					<tr>
 						<th>ลำดับ</th>
 						<th>รหัสวิชา</th>
@@ -426,13 +460,13 @@ input#teacherCheckr{
 				<br>
 				<fieldset style="border-radius: 10px">
 					<legend>เหตุผลที่ขอเพิ่ม-ถอนรายวิชา<span style="color: red">*</span></legend>
-					<textarea name="reason" id="reason" cols="120" rows="5" style="border-radius: 8px;border: 2px solid transparent;margin-top: 10px;" placeholder="เพราะ..." required></textarea>
+					<textarea name="reason" id="reason" cols="120" rows="5" style="border-radius: 8px;border: 2px solid transparent;margin-top: 10px;background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));" placeholder="เพราะ..." required></textarea>
 				</fieldset>
 				
-				<div style="margin-bottom: 8px;margin-top: 20px;">
+				<div style="margin-bottom: 5px;margin-top: 20px;">
 					<center>
 						<button class="button-submit" role="button"> 
-						<input class="submit" id="submit" type="submit" value="Submit">
+						<input style="background: unset;" class="submit" id="submit" type="submit" value="Submit">
 					</button>
 				</center>
 				</div>
