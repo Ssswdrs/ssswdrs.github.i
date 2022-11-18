@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>CS299 Project</title>
+  <style type="text/css">
+  html, body { height: 100%; margin: 0; }
+  #c { width: 100%; height: 100%; display: block; }
+/*  ส่วนนี้จะใช้ CSS ออกแบบปุ่ม Engine กับ ปุ่มเปิดปิดเพลง*/
+  button {
+  background-color: #c2fbd7;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  color: green;
+  cursor: pointer;
+  display: inline-block;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  -webkit-appearance: none; 
+  font-family: Courier;
+  font-size: 20pt;
+  text-align: center;
+  position: absolute;
+  min-width: 80px;
+  z-index: 1;
+}
+
+.savePosition,.V,.control {
+  background-color: #c2fbd7;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  color: green;
+  cursor: pointer;
+  display: inline-block;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  -webkit-appearance: none; 
+  font-family: Courier;
+  font-size: 12pt;
+  text-align: center;
+  position: absolute;
+  min-width: 80px;
+  z-index: 1;
+}
+
+button:hover {
+  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.powerButton {
+  left: 20px;
+  top: 10px;
+}
+
+.pauseButton {
+  left: 20px;
+  top: 60px;
+}
+.savePosition {
+  left: 270px;
+  top: 10px;
+}
+
+.V {
+  font-size: 20pt;
+  left: 270px;
+  top: 60px;
+}
+
+.control {
+  font-size: 10pt;
+  left: 20px;
+  top: 110px;
+}
+</style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+<!--   ส่วนของปุ่มต่างๆ และรายละเอียดเช่นความเร็วรถ -->
+  <button id="power" class="powerButton">Engine: <b><span id="start/stop">Start</span></b></button><span id="savePosition"></span>
+  <button id="playbutt" class="pauseButton">Music: <b><span id="play/pause">Play</span></b></button>
+  <span class="V" id="V">Car speed: 60 km/hr</span>
+  <span class="control" id="control">Control the car by arrow keys on keyboard.</span>
+</body>
+
+
+<script type="module">
+alert("Control the car by arrow keys on keyboard.") //ทำการแจ้งเตือนผู้ใช้ให้รู้ว่าสามารถควบคุมรถได้โดยปุ่มลูกศรบนคีบอร์ด
+import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/build/three.module.js';// import three module
+import {OrbitControls} from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/examples/jsm/controls/OrbitControls.js'; // import OrbitControls เพื่อให้กล้องสามารถโคจรรอบวัตถุได้
+import {GLTFLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r132/examples/jsm/loaders/GLTFLoader.js'; //import GLTFLoader เพื่อให้สามารถนำโมเดล gltf เข้ามาใช้งานได้
+import {GUI} from 'https://threejsfundamentals.org/threejs/../3rdparty/dat.gui.module.js'; //import GUI สำหรับสร้างUIในเว็บเพื่อปรับ intensity และปรับ light target
+function main() {
+  const canvas = document.querySelector('#c');
+  const renderer = new THREE.WebGLRenderer({canvas});
+
+  const fov = 45;
+  const aspect = 2;  // the canvas default
+  const near = 0.1;
+  const far = 100;
+  const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+  camera.position.set(-2, 1, 1);
+
+  const controls = new OrbitControls(camera, canvas); // ทำให้ควบคุมมุมกล้องแบบโคจรได้
+  controls.target.set(0, 0, 0);
+  controls.update(); //update มุมกล้อง
+
+  const scene = new THREE.Scene(); //สร้างฉากขึ้นมา
+
+  const color = 0xFFFFFF; // กำหนดสีลูกบาศก์
+  //กำหนดขนาดลูกบาศก์
+  const boxWidth = 5; 
+  const boxHeight = 5;
+  const boxDepth = 5;
+  const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth); // สร้างลูกบาศก์ขึ้นมา
+  const geometry1 = new THREE.BoxGeometry(10, 10, 10);
+
+  const material = new THREE.MeshPhongMaterial({color,opacity: 0.5, transparent: true,}); // สร้าง mesh ขึ้นมาโดยกำหนดสีและความโปร่งแสง
+   
+  function makeInstance(geometry, material, x, y, z) {
+    //นำ material ที่เป็น mesh มาสร้างmeshให้ลูกบาศก์
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube); // นำลูกบาศก์เข้าฉาก
+    //กำหนดตำแหน่งและองศาของลูกบาศก์
+    cube.position.x = x;
+    cube.position.y = y;
+    cube.position.z = z;
+    cube.rotation.x = 0.5
+    cube.rotation.y = 0.5
+    cube.rotation.z = 0.5
+
+    return cube;
+  } 
+  // จับกลุ่มลูกบาศก์ที่ได้สร้าง
+  const cubes = [
+    makeInstance(geometry, material,  -15, 112, 15),
+    makeInstance(geometry, material, -5, 95, 60),
+    makeInstance(geometry1, material,  30, 120, 50),
+    makeInstance(geometry, material, -30, 85, 10),
+    makeInstance(geometry1, material,  -10, -288, 5),
+    makeInstance(geometry, material,  10, -285, 40),
+    makeInstance(geometry1, material,  -30, -282, -50),
+    makeInstance(geometry, material,  145, 90, 20),
+    makeInstance(geometry1, material, -125, 70, -10),
+    makeInstance(geometry, material,  -180, -280, 5),
+    makeInstance(geometry1, material,  110, -245, -40),
+  ];
+
+
+  {
+    //โหลด texture ที่จะทำเป็น sky box
+    const loader = new THREE.TextureLoader();
+    const texture = loader.load(
+      'new retro.jpg',
+      () => {
+        const rt = new THREE.WebGLCubeRenderTarget(texture.image.height);
+        rt.fromEquirectangularTexture(renderer, texture);
+        scene.background = rt.texture; //กำหนด texture ให้เป็นพื้นหลัง
+        material.envMap = rt.texture; // ทำให้ material ที่ใช้เป็น mesh ให้ลูกบาศก์ สามารถสะท้อนกับ textureได้
+      });
+  }
+
+  {
+    const skyColor = 0xE40FF8;  // light blue
+    const groundColor = 0xB97A20;  
+    const hsintensity = 0.7; //ความเข้มแสง
+    const hslight = new THREE.HemisphereLight(skyColor, groundColor, hsintensity); //สร้าง HemisphereLight
+    scene.add(hslight); // นำ HemisphereLight เข้าฉาก
+  }
+
+
+  let light; 
+  {
+    const color = 0x2BFEF9;
+    const intensity = 1.5;
+    light = new THREE.DirectionalLight(color, intensity); //สร้าง DirectionalLight
+    light.position.set(5, 10, 2); // กำหนดตำแหน่งของ DirectionalLight
+    scene.add(light); // เพิ่มDirectionalLightเข้าฉาก
+    scene.add(light.target);// เพิ่มtargetของDirectionalLightเข้าฉาก
+  }
+// ฟังก์ชันที่ทำการกำหนดค่าต่างๆสำหรับพื้นที่แสดงผล เช่น ตำแหน่งกล้อง กล้องหันไปทางไหน ขนาดพื้นที่แสดงผล
+  function frameArea(sizeToFitOnScreen, boxSize, boxCenter, camera) {
+    const halfSizeToFitOnScreen = sizeToFitOnScreen * 0.5;
+    const halfFovY = THREE.MathUtils.degToRad(camera.fov * .5);
+    const distance = halfSizeToFitOnScreen / Math.tan(halfFovY);
+    // compute a unit vector that points in the direction the camera is now
+    // in the xz plane from the center of the box
+    const direction = (new THREE.Vector3())
+        .subVectors(camera.position, boxCenter)
+        .multiply(new THREE.Vector3(1, 0, 1))
+        .normalize();
+
+    // move the camera to a position distance units way from the center
+    // in whatever direction the camera was from the center already
+    camera.position.copy(direction.multiplyScalar(distance).add(boxCenter));
+
+    // pick some near and far values for the frustum that
+    // will contain the box.
+    camera.near = boxSize / 100;
+    camera.far = boxSize * 100;
+
+    camera.updateProjectionMatrix();
+
+    // point the camera to look at the center of the box
+    camera.lookAt(boxCenter.x, boxCenter.y, boxCenter.z);
+  }
+
+// ทำการประกาศตัวแปรไว้ด้านนอกเพื่อให้ฟังก์ชันอื่นเข้าถึงได้
+  let world; //โลกรวมถึงก้อนเมฆและตึกต่างๆ
+  let car; //รถ
+  let wheels; //ล้อของรถยนต์
+  {
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.load('lamboandworld.gltf', (gltf) => {
+      const root = gltf.scene; // ให้ตัวแปรrootเป็นฉากของ lamboandworld.gltf 
+      scene.add(root); //นำฉากของ lamboandworld.gltf เข้าฉากที่จะแสดง
+      world = root.getObjectByName('world') //ให้ ตัวแปรworld เก็บworld ที่อยู่ข้างในฉากของ lamboandworld.gltf 
+      car = root.getObjectByName('car') //ให้ตัวแปร car เก็บcar ที่อยู่ข้างในฉากของ lamboandworld.gltf 
+      wheels = root.getObjectByName('wheel') //ให้ตัวแปร wheels เก็บล้อทั้งหมด ที่อยู่ข้างในฉากของ lamboandworld.gltf
+      car.position.y = -0.2 //ปรับตำแหน่งของรถยนต์ให้ลงจากตำแหน่งตั้งต้นเล็กน้อย
+      // compute the box that contains all the stuff
+      // from root and below
+      const box = new THREE.Box3().setFromObject(root); 
+
+      const boxSize = 0.2*box.getSize(new THREE.Vector3()).length();
+      const boxCenter = box.getCenter(new THREE.Vector3());
+      boxCenter.y += 100 // กำหนดตำแหน่งของกล้องในแนวแกน Y
+      // set the camera to frame the box
+      frameArea(boxSize, boxSize, boxCenter, camera); // ส่งค่าและวัตถุๆต่างๆเข้าฟังก์ชัน frameArea
+
+      // update the Trackball controls to handle the new size
+      controls.maxDistance = boxSize * 10;
+      controls.target.copy(boxCenter);
+      controls.update();
+    });
+  }
+
+// ทำการสร้างตัวเล่นเพลง
+const listener = new THREE.AudioListener();// สร้างตัวรับเสียง
+camera.add(listener); // นำตัวรับเสียงเข้ากล้อง
+
+// create a global audio source
+const sound = new THREE.Audio(listener);
+
+// load a sound and set it as the Audio object's buffer
+const audioLoader = new THREE.AudioLoader();
+audioLoader.load('Tokyo Music Walker- Way Home.mp3', function(buffer) {
+  sound.setBuffer(buffer); // กำหนด buffer
+  sound.setLoop(true); //ทำให้เพลงวนซ้ำเมื่อเพลงเล่นจบ
+  sound.setVolume(0.5); //กำหนดความดังของเพลง
+  sound.pause(); //หยุดเพลงเพื่อให้ผู้ใช้กดเปิดเองจากปุ่มบนหน้าแสดงผล
+});
+
+document.getElementById("playbutt").addEventListener("click", togglePause, false); // ทำการสร้างตัวรับการกดปุ่ม(click) และเมื่อผู้ใช้กดปุ่มจะทำฟังก์ชัน togglePause
+document.getElementById("power").addEventListener("click", togglePower, false);// ทำการสร้างตัวรับการกดปุ่ม(click) และเมื่อผู้ใช้กดปุ่มจะทำฟังก์ชัน togglePower
+let v = 60
+
+// ทำการสร้างตัวรับการกดแป้นพิม(click) และเมื่อผู้ใช้กดปุ่มลูกศรบนคีบอร์ดจะทำการปรับค่าต่างๆตามการกด ส่งผลให้รถมีการเคลื่อนไหวตามการกด
+document.addEventListener("keydown", function(event) {
+  event.preventDefault();
+  const key = event.key; 
+  
+  if(engine){
+    switch (key) { 
+    case "ArrowLeft":
+      // toLeft pressed เมื่อกดลูกศรชี้ซ้ายรถจะขยับไปทางซ้ายของรถ
+      if(LRcontrol < 5.3) {
+        LRcontrol += 0.1 //ปรับตำแหน่งรถไปทางซ้ายของรถ
+        rotateY = 0.1 //ปรับค่าให้รถเบี่ยงตามทิศทางที่รถขยับไป (ทางซ้าย)
+        if(LRcontrol < -3 && rotateZ <= 0.05)rotateZ += 0.01
+        else if (LRcontrol <= 0 && LRcontrol > -3)rotateZ = 0
+        if(LRcontrol > 4 && rotateZ >= -0.05)rotateZ -= 0.01 //ปรับค่าให้รถเอียงตามความโค้งของโลกในแนวขวางของรถ
+        else if (LRcontrol >= 0 && LRcontrol <= 4)rotateZ = 0
+      }
+      else rotateY = 0; //เมื่อเลี้ยวเสร็จก็ให้รถตรงดังเดิมด้วย
+      break;
+    case "ArrowRight":
+      // toRight กดลูกศรขวารถขยับไปทางขวาของรถ
+      if(LRcontrol > -6.5){
+        LRcontrol -= 0.1 //ปรับตำแหน่งรถไปทางขวาของรถ
+        rotateY = -0.1 //ปรับค่าให้รถเบี่ยงตามทิศทางที่รถขยับไป (ทางขวา)
+        if(LRcontrol < -3 && rotateZ <= 0.05)rotateZ += 0.01
+        else if (LRcontrol <= 0 && LRcontrol > -3)rotateZ = 0
+        if(LRcontrol > 4 && rotateZ >= -0.05)rotateZ -= -0.01 //ปรับค่าให้รถเอียงตามความโค้งของโลกในแนวขวางของรถ
+        else if (LRcontrol >= 0 && LRcontrol <= 4)rotateZ = 0
+      }
+      else rotateY = 0; //เมื่อเลี้ยวเสร็จก็ให้รถตรงดังเดิม
+      break;
+    case "ArrowUp":
+      // SpeedUp
+      if(speed < 5){
+        speed += 0.1 //ปรับตำแหน่งของรถให้ไปข้างหน้า
+        wheelR += 0.1 //ปรับความเร็วล้อรถให้หมุนเร็วขึ้น
+        if(rotateX <= 0)rotateX += 0.001 //ปรับค่าให้รถเอียงตามความโค้งของโลกในแนวตรงของรถ
+        document.getElementById("V").innerHTML = "Car speed: " + Math.round(60+speed) + " km/hr" //แสดงค่าความเร็วรถ
+      v = Math.round(60+speed)
+      }
+      break;
+    case "ArrowDown":
+      // SpeedDown
+      if(speed > -5){
+        speed -= 0.1 //ปรับตำแหน่งของรถให้ถอยหลัง
+        wheelR -= 0.1 //ปรับความเร็วล้อรถให้หมุนช้าลง
+        if(speed < -1)rotateX -= 0.002 //ปรับค่าให้รถเอียงตามความโค้งของโลกในแนวตรงของรถ
+        document.getElementById("V").innerHTML = "Car speed: " + Math.round(60+speed) + " km/hr" //แสดงค่าความเร็วรถ
+      v = Math.round(60+speed)
+      }
+      break;
+  }
+  }
+});
+//เมื่อเอามือออกจากคีย์ลูกศร บนคีบอร์ดจะทำฟังก์ชันนี้ ซึ่งฟังก์ชันนี้ทำการจัดรถให้ตรงดังเดิม
+document.addEventListener("keyup", function(event) {
+  event.preventDefault();
+  const key = event.key; 
+  switch (key) { 
+    case "ArrowLeft":
+      rotateY = 0
+      break;
+    case "ArrowRight":
+      rotateY = 0
+      break;
+  }
+});
+
+//ฟังก์ชันที่หากเพลงเล่นอยู่จะหยุดเพลง แต่ถ้าเพลงหยุดอยู่จะทำการเล่นเพลง
+// Toggle Pause
+function togglePause() {
+  if(sound.isPlaying){
+    document.getElementById('play/pause').innerHTML = "Play";
+    sound.pause()
+  }
+  else {
+    document.getElementById('play/pause').innerHTML = "Pause";
+    sound.play()
+  }
+}
+
+let engine = false;
+
+//ฟังก์ชันถ้ารถแล่นอยู่จะทำให้หยุด ตรงกันข้ามถ้ารถหยุดจะทำให้แล่น ด้วยตัวแปร engine
+function togglePower(time) {
+
+  if(engine==false){
+    engine = true;
+    document.getElementById('start/stop').innerHTML = "Stop";
+  }
+  else {
+    document.getElementById('start/stop').innerHTML = "Start";
+    engine = false;
+  }
+}
+//ฟังก์ชันอัปเดตกล้อง
+function updateCamera() {
+      light.target.updateMatrixWorld();
+    }
+    updateCamera();
+
+// class ที่ช่วยทำการกำหนดสีของแสง
+  class ColorGUIHelper {
+    constructor(object, prop) {
+      this.object = object;
+      this.prop = prop;
+    }
+    get value() {
+      return `#${this.object[this.prop].getHexString()}`;
+    }
+    set value(hexString) {
+      this.object[this.prop].set(hexString);
+    }
+  }
+// ฟังก์ชันที่ช่วยสร้าง UI แบบ slide bar เพื่อปรับตำแหน่ง x, y, z
+  function makeXYZGUI(gui, vector3, name, onChangeFn) {
+    const folder = gui.addFolder(name);
+    folder.add(vector3, 'x', -10, 10).onChange(onChangeFn);
+    folder.add(vector3, 'y', 0, 30).onChange(onChangeFn);
+    folder.add(vector3, 'z', -10, 10).onChange(onChangeFn);
+    folder.open();
+  }
+  //เริ่มต้นสร้าง UI ด้วยGUI
+  const gui = new GUI();
+  gui.addColor(new ColorGUIHelper(light, 'color'), 'value').name('Light Color'); //เพิ่มตัวปรับสีของแสงเข้า UI
+  gui.add(light, 'intensity', 0, 2, 0.01); //เพิ่มตัวปรับความเข้มของแสงเข้า UI
+  makeXYZGUI(gui, light.target.position, 'Light Target', updateCamera); //สร้างตัวปรับทิศทางที่แสงส่อง
+
+
+  function resizeRendererToDisplaySize(renderer) {
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    const needResize = canvas.width !== width || canvas.height !== height;
+    if (needResize) {
+      renderer.setSize(width, height, false);
+    }
+    return needResize;
+  }
+  //สร้างตัวแปรเพื่อให้ฟังก์ชันต่างๆเข้าถึงได้แบบ global
+  let LRcontrol = 0;
+  let speed = 0;
+  let rotateY = 0;
+  let wheelR = 15; 
+  let rotateZ = 0;
+  let rotateX = 0;
+  let tempTime = 0;
+  let stopSaving = false //ตัวแปรที่เอาไว้เช็คว่าเวลาของรถที่หยุดตามทันเวลาของsceneที่เดินไปเรื่อยๆทันหรือยัง
+  let recordtime = false //ช่วยให้เมื่อกดหยุดรถจะลดการทำงานที่ไม่จำเป็นลง
+  function render(time) {
+    time *= 0.001;  // convert to seconds
+
+    if (resizeRendererToDisplaySize(renderer)) {
+      const canvas = renderer.domElement;
+      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      camera.updateProjectionMatrix();
+    }
+    //เช็คว่ามีworldและengine true หรือไม่ก่อนทำการกำหนดปรับค่าต่างๆ
+    if(world && engine){
+      recordtime = true
+      if((-speed*0.1)+tempTime >= (-speed*0.1)-time && stopSaving){
+        tempTime -= 0.01
+        world.rotation.x = (-speed*0.1)+tempTime
+        document.getElementById("V").innerHTML = "Car speed: " + 100 + " km/hr"
+      }
+      else {
+        if(stopSaving)document.getElementById("V").innerHTML = "Car speed: " + v + " km/hr" //แสดงความเร็วรถ
+        stopSaving = false
+        world.rotation.x = (-speed*0.1)-time //การหมุนของโลก
+        document.getElementById("savePosition").innerHTML = "The car will be saved position, when you stop engine." // แสดงข้อความว่าสามารถบันทึกตำแหน่งของรถได้เมื่อกดหยุดengine และหลังจากกดstartอีกครั้งทุกอย่างจะอยู่ในตำแหน่งเดิมในตอนกดหยุดและรถก็จะแล่นต่อจากตำแหน่งเดิม
+        document.getElementById("savePosition").setAttribute("class", "savePosition");  //ใส่ class savePositon ให้element ที่มี id savePosition
+      }
+      if(car){
+      car.position.y = 0.08*Math.sin(time*20)-0.3
+      car.position.x = LRcontrol; //ตำแหน่งรถซ้าย/ขวา
+      car.position.z = speed; //ตำแหน่งรถหน้า/หลัง
+      //กำหนดองศาของรถตามที่ทำให้ฟังก์ชันก่อนหน้า
+      car.rotation.x = rotateX 
+      car.rotation.y = rotateY;
+      car.rotation.z = rotateZ;
+      //ทำให้ล้อรถแต่ละล้อหมุน
+        if(wheels){
+        for(const wheel of wheels.children.slice()){
+          wheel.rotation.x = wheelR*time //กำหนดความเร็วกาหมุนของล้อ
+            }
+          }
+      }
+    }
+    else{
+      if(recordtime){
+         stopSaving = true; 
+        tempTime = (-speed*0.1)-time;
+        document.getElementById("savePosition").innerHTML = "" 
+        document.getElementById("savePosition").classList.remove("savePosition") // ลบclass savePosition ออกจาก element ที่มี id savePosition
+        recordtime =false
+      }
+
+    }
+    //กำหนดตำแหน่งของแสงให้ส่ายไปมา
+    if(light){
+      light.position.set(5*Math.sin(time)*10, 20, 2*Math.sin(time)*20);
+    }
+    //ทำให้แต่ละลูกบาศก์มีการหมุน
+    cubes.forEach((cube, ndx) => {
+      const speed = 1 + ndx * .1;
+      const rot = time * speed;
+      cube.rotation.x = rot;
+      cube.rotation.y = rot;
+      cube.rotation.z = rot;
+    });
+
+    renderer.render(scene, camera);
+
+    requestAnimationFrame(render);
+  }
+
+  requestAnimationFrame(render);
+}
+
+main();
+
+
+
+</script>
+
+</html>
+
