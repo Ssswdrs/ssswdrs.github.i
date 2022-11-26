@@ -1,3 +1,20 @@
+<!--
+CS299 - Term project
+Due: 27 November 2022, 23:59
+
+Group: EFE7BC
+
+First Name: Saksorn
+Last Name: Sawatdeeraksa
+Student ID: 6409682884
+E-mail: saksorn.saw@dome.tu.ac.th
+
+First Name: Punna
+Last Name: Atchariyapanya
+Student ID: 6409682801
+E-mail: punna.atc@dome.tu.ac.th
+
+-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +49,7 @@
   z-index: 1;
 }
 
-.savePosition,.V,.control {
+.V,.control {
   background-color: #c2fbd7;
   border-radius: 100px;
   box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
@@ -70,21 +87,17 @@ button:hover {
   left: 20px;
   top: 60px;
 }
-.savePosition {
-  left: 270px;
-  top: 10px;
-}
 
 .V {
   font-size: 20pt;
-  left: 270px;
+  left: 280px;
   top: 60px;
 }
 
 .control {
   font-size: 10pt;
-  left: 20px;
-  top: 110px;
+  left: 280px;
+  top: 20px;
 }
 </style>
 </head>
@@ -93,7 +106,7 @@ button:hover {
 <!--   ส่วนของปุ่มต่างๆ และรายละเอียดเช่นความเร็วรถ -->
   <button id="power" class="powerButton">Engine: <b><span id="start/stop">Start</span></b></button><span id="savePosition"></span>
   <button id="playbutt" class="pauseButton">Music: <b><span id="play/pause">Play</span></b></button>
-  <span class="V" id="V">Car speed: 60 km/hr</span>
+  <div class="V">Car speed: <span id="V" style="font-weight: bold;">0</span> km/hr</div>
   <span class="control" id="control">Control the car by arrow keys on keyboard.</span>
 </body>
 
@@ -279,7 +292,7 @@ document.addEventListener("keydown", function(event) {
     case "ArrowLeft":
       // toLeft pressed เมื่อกดลูกศรชี้ซ้ายรถจะขยับไปทางซ้ายของรถ
       if(LRcontrol < 5.3) {
-        LRcontrol += 0.1 //ปรับตำแหน่งรถไปทางซ้ายของรถ
+        LRcontrol += 0.15 //ปรับตำแหน่งรถไปทางซ้ายของรถ
         rotateY = 0.1 //ปรับค่าให้รถเบี่ยงตามทิศทางที่รถขยับไป (ทางซ้าย)
         if(LRcontrol < -3 && rotateZ <= 0.05)rotateZ += 0.01
         else if (LRcontrol <= 0 && LRcontrol > -3)rotateZ = 0
@@ -291,7 +304,7 @@ document.addEventListener("keydown", function(event) {
     case "ArrowRight":
       // toRight กดลูกศรขวารถขยับไปทางขวาของรถ
       if(LRcontrol > -6.5){
-        LRcontrol -= 0.1 //ปรับตำแหน่งรถไปทางขวาของรถ
+        LRcontrol -= 0.15 //ปรับตำแหน่งรถไปทางขวาของรถ
         rotateY = -0.1 //ปรับค่าให้รถเบี่ยงตามทิศทางที่รถขยับไป (ทางขวา)
         if(LRcontrol < -3 && rotateZ <= 0.05)rotateZ += 0.01
         else if (LRcontrol <= 0 && LRcontrol > -3)rotateZ = 0
@@ -304,20 +317,24 @@ document.addEventListener("keydown", function(event) {
       // SpeedUp
       if(speed < 5){
         speed += 0.1 //ปรับตำแหน่งของรถให้ไปข้างหน้า
+        sp += 0.0001 //ปรับความเร็วการหมุนของโลกให้หมุนเร็วขึ้นในตอนรถเคลื่อน
+        sd += 0.0001 //ปรับความเร็วการหมุนของโลกให้หมุนเร็วขึ้นตามความเร็วรถก่อนชะลอ
         wheelR += 0.1 //ปรับความเร็วล้อรถให้หมุนเร็วขึ้น
         if(rotateX <= 0)rotateX += 0.001 //ปรับค่าให้รถเอียงตามความโค้งของโลกในแนวตรงของรถ
-        document.getElementById("V").innerHTML = "Car speed: " + Math.round(60+speed) + " km/hr" //แสดงค่าความเร็วรถ
-      v = Math.round(60+speed)
+        v = Math.round(60+speed*10)
+        document.getElementById("V").innerHTML = v //แสดงค่าความเร็วรถ
       }
       break;
     case "ArrowDown":
       // SpeedDown
       if(speed > -5){
         speed -= 0.1 //ปรับตำแหน่งของรถให้ถอยหลัง
+        sp -= 0.0001 //ปรับความเร็วการหมุนของโลกให้หมุนช้าลงในตอนรถเคลื่อน
+        sd -= 0.0001 //ปรับความเร็วการหมุนของโลกให้หมุนช้าลงตามความเร็วรถก่อนชะลอ
         wheelR -= 0.1 //ปรับความเร็วล้อรถให้หมุนช้าลง
-        if(speed < -1)rotateX -= 0.002 //ปรับค่าให้รถเอียงตามความโค้งของโลกในแนวตรงของรถ
-        document.getElementById("V").innerHTML = "Car speed: " + Math.round(60+speed) + " km/hr" //แสดงค่าความเร็วรถ
-      v = Math.round(60+speed)
+        if(speed < -1)rotateX -= 0.0015 //ปรับค่าให้รถเอียงตามความโค้งของโลกในแนวตรงของรถ
+        v = Math.round(60+speed*10)
+        document.getElementById("V").innerHTML = v  //แสดงค่าความเร็วรถ
       }
       break;
   }
@@ -341,11 +358,11 @@ document.addEventListener("keyup", function(event) {
 // Toggle Pause
 function togglePause() {
   if(sound.isPlaying){
-    document.getElementById('play/pause').innerHTML = "Play";
+    document.getElementById('play/pause').innerHTML = "Play";//แสดงข้อความ Play ที่ปุ่ม play/pause
     sound.pause()
   }
   else {
-    document.getElementById('play/pause').innerHTML = "Pause";
+    document.getElementById('play/pause').innerHTML = "Pause";//แสดงข้อความ Pause ที่ปุ่มplay/pause
     sound.play()
   }
 }
@@ -357,10 +374,10 @@ function togglePower(time) {
 
   if(engine==false){
     engine = true;
-    document.getElementById('start/stop').innerHTML = "Stop";
+    document.getElementById('start/stop').innerHTML = "Stop"; //แสดงข้อความ Stop ที่ปุ่มstart/stop
   }
   else {
-    document.getElementById('start/stop').innerHTML = "Start";
+    document.getElementById('start/stop').innerHTML = "Start";//แสดงข้อความ Start ที่ปุ่มstart/stop
     engine = false;
   }
 }
@@ -415,9 +432,15 @@ function updateCamera() {
   let wheelR = 15; 
   let rotateZ = 0;
   let rotateX = 0;
-  let tempTime = 0;
-  let stopSaving = false //ตัวแปรที่เอาไว้เช็คว่าเวลาของรถที่หยุดตามทันเวลาของsceneที่เดินไปเรื่อยๆทันหรือยัง
-  let recordtime = false //ช่วยให้เมื่อกดหยุดรถจะลดการทำงานที่ไม่จำเป็นลง
+  let tempPos = 0; // ตัวแปรที่จะเก็บตำแหน่งของโลกว่าหมุนไปถึงไหนแล้ว
+  let slowdown = 2; // ระยะเวลาที่รถใช้ชะลอ
+  let stop = false; //ตัวที่จะช่วยให้ทำตามเงื่อนไขเพียงครั้งเดียว
+  let speeddown = 0; //ตัวแปรที่เก็บตำแหน่งของโลกตอนรถเริ่มชะลอ
+  let temp = 0; //ตัวแปรที่เก็บตำแหน่งของโลกตอนรถเริ่มแล่นหลังจากหยุดรถ
+  let stopCon = false//ตัวที่จะช่วยให้ทำตามเงื่อนไขเพียงครั้งเดียว
+  let sp = 0.007 //กำหนดค่าเริ่มต้นให้กับความเร็วการหมุนของโลกตอนรถแล่น
+  let sd = 0.003//กำหนดค่าเริ่มต้นให้กับความเร็วการหมุนของโลกตอนรถชะลอ
+  let stopv = 0//ตัวแปรที่จะเก็บความเร็วรถตอนชะลอ
   function render(time) {
     time *= 0.001;  // convert to seconds
 
@@ -428,19 +451,15 @@ function updateCamera() {
     }
     //เช็คว่ามีworldและengine true หรือไม่ก่อนทำการกำหนดปรับค่าต่างๆ
     if(world && engine){
-      recordtime = true
-      if((-speed*0.1)+tempTime >= (-speed*0.1)-time && stopSaving){
-        tempTime -= 0.01
-        world.rotation.x = (-speed*0.1)+tempTime
-        document.getElementById("V").innerHTML = "Car speed: " + 100 + " km/hr"
+      document.getElementById("V").innerHTML = v //แสดงความเร็วรถ
+      if(tempPos>=999999) tempPos = 0 //ป้องกันการเก็บค่ามากเกินไป เพราะอาจจะกระตุกได้ในบางอุปกรณ์
+      tempPos += sp
+      if(!stop){
+        tempPos = temp
+        stop = true
+        stopCon = true
       }
-      else {
-        if(stopSaving)document.getElementById("V").innerHTML = "Car speed: " + v + " km/hr" //แสดงความเร็วรถ
-        stopSaving = false
-        world.rotation.x = (-speed*0.1)-time //การหมุนของโลก
-        document.getElementById("savePosition").innerHTML = "The car will be saved position, when you stop engine." // แสดงข้อความว่าสามารถบันทึกตำแหน่งของรถได้เมื่อกดหยุดengine และหลังจากกดstartอีกครั้งทุกอย่างจะอยู่ในตำแหน่งเดิมในตอนกดหยุดและรถก็จะแล่นต่อจากตำแหน่งเดิม
-        document.getElementById("savePosition").setAttribute("class", "savePosition");  //ใส่ class savePositon ให้element ที่มี id savePosition
-      }
+      world.rotation.x = (-speed*0.1)-tempPos //การหมุนของโลก
       if(car){
       car.position.y = 0.08*Math.sin(time*20)-0.3
       car.position.x = LRcontrol; //ตำแหน่งรถซ้าย/ขวา
@@ -457,15 +476,33 @@ function updateCamera() {
           }
       }
     }
-    else{
-      if(recordtime){
-         stopSaving = true; 
-        tempTime = (-speed*0.1)-time;
-        document.getElementById("savePosition").innerHTML = "" 
-        document.getElementById("savePosition").classList.remove("savePosition") // ลบclass savePosition ออกจาก element ที่มี id savePosition
-        recordtime =false
+    else {
+      //เงื่อนไขสำหรับการชะลอรถ
+      if(stop && slowdown >= 0){
+        stopv = Math.round(slowdown*(v/2))
+        if(stopv <= v && stopv >= 0)document.getElementById("V").innerHTML = stopv //แสดงความเร็วรถ
+        else document.getElementById("V").innerHTML = 0
+        if(stopCon){
+          speeddown = tempPos // กำหนดให้ตัวแปรเก็บตำแหน่งของโลกก่อนที่จะกดหยุด
+          stopCon = false
+        }
+        speeddown += sd +(slowdown*0.002)
+        if((-speed*0.1)-speeddown <= -1)world.rotation.x = (-speed*0.1)-speeddown 
+        //เงื่อนไขที่ให้เวลาที่รถชะลอต่างไปตามความเร็วก่อนหยุด
+        if(v > 60)slowdown -= 0.004 
+        else if(v > 27)slowdown -= 0.006
+        else slowdown -= 0.4
+        if(wheels){
+        for(const wheel of wheels.children.slice()){ //เข้าถึงแต่ละล้อ
+          wheel.rotation.x = wheelR*time //กำหนดความเร็วกาหมุนของล้อแต่ละล้อ
+            }
+        }
       }
-
+      else {
+        temp = speeddown //กำหนดให้ตัวแปรเก็บตำแหน่งของโลกก่อนรถหยุดนิ่ง
+        slowdown = 2 //กำหนดเพื่อให้นำไปใช้ต่อในการหยุดครั้งถัดไป
+        stop = false
+      }
     }
     //กำหนดตำแหน่งของแสงให้ส่ายไปมา
     if(light){
